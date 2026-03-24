@@ -247,8 +247,8 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
     </div>
     <div style="margin-top:10px;margin-bottom:6px">
       <div class="sec-label">Platforms</div>
-      <div class="nav" style="cursor:default;opacity:.6"><span class="ic">🎞️</span> Instagram Reels</div>
-      <div class="nav" style="cursor:default;opacity:.6"><span class="ic">🎬</span> YouTube Shorts</div>
+      <button class="nav" id="nav-reels" onclick="switchView('reels')"><span class="ic">🎞️</span> Instagram Reels</button>
+      <button class="nav" id="nav-shorts" onclick="switchView('shorts')"><span class="ic">🎬</span> YouTube Shorts</button>
     </div>
     <div class="sb-footer">
       <button class="nav" id="nav-settings" onclick="switchView('settings')">
@@ -338,7 +338,124 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
       </div>
     </div>
 
-    <!-- SETTINGS VIEW -->
+    <!-- REELS VIEW -->
+    <div class="view" id="view-reels">
+      <div class="ch">
+        <div><div class="ch-title">🎞️ Instagram Reels</div><div class="ch-sub">Manage your Reels connection, schedule, and posting strategy</div></div>
+        <span class="badge off" id="igStatusBadge">● Not Connected</span>
+      </div>
+      <div style="flex:1;overflow:auto;padding:0 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-content:start">
+
+        <!-- Connect Account -->
+        <div class="panel" style="grid-column:1/-1">
+          <div class="panel-ttl">🔗 Connect Instagram Account</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">
+            Save your Instagram username and access token locally. Your credentials never leave your device.
+            To get an access token, create a Meta Developer app and generate a long-lived token via the Instagram Graph API.
+            <a href="#" style="color:var(--primary);text-decoration:none;margin-left:4px" onclick="window.op?.shell.open('https://developers.facebook.com/docs/instagram-api/getting-started')">Setup guide →</a>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+            <div class="fg" style="margin:0">
+              <label class="lbl">Instagram Username</label>
+              <input class="inp" id="ig-username" placeholder="@yourusername" />
+            </div>
+            <div class="fg" style="margin:0">
+              <label class="lbl">Access Token</label>
+              <input class="inp" type="password" id="ig-token" placeholder="EAAxxxxxxxxxxxxxxx..." />
+            </div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="save-btn" onclick="saveIgCreds()">Save Credentials</button>
+            <button class="save-btn" style="background:var(--card);border:1px solid var(--border);color:var(--text)" onclick="clearIgCreds()">Disconnect</button>
+            <span style="font-size:12px;color:var(--muted)" id="igSavedLabel"></span>
+          </div>
+        </div>
+
+        <!-- Scheduled Reels -->
+        <div class="panel">
+          <div class="panel-ttl">📅 Scheduled Reels</div>
+          <div id="igPostsList">
+            <div class="empty-st"><div class="empty-ic">🎞️</div><div style="font-size:13px">No Reels scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Reel</div></div>
+          </div>
+          <button class="gen-btn" style="margin-top:14px;font-size:13px" onclick="switchView('composer')">✦ Compose a New Reel</button>
+        </div>
+
+        <!-- Best Posting Times -->
+        <div class="panel">
+          <div class="panel-ttl">⏰ Best Posting Times</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">Based on general Instagram Reels best practices. Adjust based on your audience analytics.</div>
+
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Top Days</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span style="padding:5px 12px;border-radius:20px;background:var(--primary-s);color:var(--primary);font-size:12px;font-weight:600">Mon</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--primary-s);color:var(--primary);font-size:12px;font-weight:600">Wed</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--primary-s);color:var(--primary);font-size:12px;font-weight:600">Fri</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--primary-s);color:var(--primary);font-size:12px;font-weight:600">Sat</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Tue</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Thu</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Sun</span>
+            </div>
+          </div>
+
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Peak Windows</div>
+            <div style="margin-bottom:10px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+                <span style="font-weight:600;color:var(--text)">9:00 – 11:00 AM</span>
+                <span style="color:var(--muted)">Morning peak</span>
+              </div>
+              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+                <div style="height:100%;width:90%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div>
+              </div>
+            </div>
+            <div style="margin-bottom:10px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+                <span style="font-weight:600;color:var(--text)">7:00 – 9:00 PM</span>
+                <span style="color:var(--muted)">Evening peak</span>
+              </div>
+              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+                <div style="height:100%;width:95%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div>
+              </div>
+            </div>
+            <div style="margin-bottom:10px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
+                <span style="font-weight:600;color:var(--text)">12:00 – 1:00 PM</span>
+                <span style="color:var(--muted)">Lunch window</span>
+              </div>
+              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
+                <div style="height:100%;width:65%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Quick Tips</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">🪝 Hook viewers in the first 1–3 seconds</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">📌 Add text overlays — 80% watch without sound</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">🔁 Loop-friendly endings boost replay rate</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">#️⃣ Use 5–10 niche hashtags, not broad ones</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0">📣 End with a clear CTA — save, share, or comment</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SHORTS VIEW -->
+    <div class="view" id="view-shorts">
+      <div class="ch">
+        <div><div class="ch-title">🎬 YouTube Shorts</div><div class="ch-sub">Coming soon</div></div>
+      </div>
+      <div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--muted)">
+        <div style="font-size:40px">🎬</div>
+        <div style="font-size:15px;font-weight:600;color:var(--dim)">YouTube Shorts Dashboard</div>
+        <div style="font-size:13px">Coming in a future update</div>
+        <button class="gen-btn" style="width:auto;padding:10px 24px;margin-top:8px;font-size:13px" onclick="switchView('composer')">✦ Compose a Short</button>
+      </div>
+    </div>
+
+    
     <div class="view" id="view-settings">
       <div class="ch"><div><div class="ch-title">Settings</div><div class="ch-sub">All data stored locally on your device</div></div></div>
       <div class="set-wrap">
@@ -512,8 +629,49 @@ if (IS_MAC) {
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
 // ── THEME ─────────────────────────────────────────────────────────
+const THEMES = {
+  midnight: {
+    '--bg':'#0d0d14','--surface':'#13131f','--card':'#1a1a2e',
+    '--border':'#232338','--border-light':'#2e2e48',
+    '--primary':'#8b5cf6','--primary-h':'#7c3aed','--primary-s':'rgba(139,92,246,0.14)',
+    '--reels':'#c026d3','--reels-s':'rgba(192,38,211,0.14)',
+    '--shorts':'#ef4444','--shorts-s':'rgba(239,68,68,0.13)',
+    '--both':'#f59e0b','--both-s':'rgba(245,158,11,0.14)',
+    '--text':'#e2e2f0','--dim':'#9292b0','--muted':'#5c5c7a','--success':'#10b981'
+  },
+  nord: {
+    '--bg':'#242933','--surface':'#2e3440','--card':'#353d4a',
+    '--border':'#3b4252','--border-light':'#4c566a',
+    '--primary':'#5e81ac','--primary-h':'#4c7099','--primary-s':'rgba(94,129,172,0.18)',
+    '--reels':'#88c0d0','--reels-s':'rgba(136,192,208,0.18)',
+    '--shorts':'#bf616a','--shorts-s':'rgba(191,97,106,0.18)',
+    '--both':'#a3be8c','--both-s':'rgba(163,190,140,0.18)',
+    '--text':'#eceff4','--dim':'#9aabb8','--muted':'#4c566a','--success':'#a3be8c'
+  },
+  sakura: {
+    '--bg':'#16101a','--surface':'#1e1224','--card':'#261630',
+    '--border':'#2e1a36','--border-light':'#3d2248',
+    '--primary':'#e879a0','--primary-h':'#d4608a','--primary-s':'rgba(232,121,160,0.18)',
+    '--reels':'#f9a8c9','--reels-s':'rgba(249,168,201,0.18)',
+    '--shorts':'#c084fc','--shorts-s':'rgba(192,132,252,0.18)',
+    '--both':'#fb923c','--both-s':'rgba(251,146,60,0.18)',
+    '--text':'#f5dde8','--dim':'#9a6880','--muted':'#5a3a50','--success':'#86efac'
+  },
+  slate: {
+    '--bg':'#0e1117','--surface':'#161b22','--card':'#1c2128',
+    '--border':'#21262d','--border-light':'#30363d',
+    '--primary':'#d97706','--primary-h':'#b45309','--primary-s':'rgba(217,119,6,0.18)',
+    '--reels':'#fbbf24','--reels-s':'rgba(251,191,36,0.18)',
+    '--shorts':'#f87171','--shorts-s':'rgba(248,113,113,0.18)',
+    '--both':'#34d399','--both-s':'rgba(52,211,153,0.18)',
+    '--text':'#e6edf3','--dim':'#8b949e','--muted':'#484f58','--success':'#3fb950'
+  }
+}
+
 function applyTheme(name, save = true) {
-  document.body.className = name === 'midnight' ? '' : `theme-${name}`
+  const vars = THEMES[name] || THEMES.midnight
+  const root = document.documentElement
+  for (const [k, v] of Object.entries(vars)) root.style.setProperty(k, v)
   S.theme = name
   document.querySelectorAll('.theme-opt').forEach(el => {
     el.classList.toggle('active', el.dataset.theme === name)
@@ -528,6 +686,10 @@ async function init() {
     const gc = await window.op.store.get('googleClientId'); if (gc) document.getElementById('s-gcid').value = gc
     const gt = await window.op.store.get('googleToken'); if (gt) setGCBadge(true)
     const savedTheme = await window.op.store.get('theme')
+    const igU = await window.op.store.get('igUsername')
+    const igT = await window.op.store.get('igToken')
+    if (igU) { document.getElementById('ig-username').value = igU; setIgBadge(true); document.getElementById('igSavedLabel').textContent = `Connected as ${igU}` }
+    if (igT) document.getElementById('ig-token').value = igT
     if (savedTheme) applyTheme(savedTheme, false)
     else applyTheme('midnight', false)
     const skipped = await window.op.store.get('wizardSkipped')
@@ -668,6 +830,7 @@ function switchView(v) {
   document.querySelectorAll('.nav').forEach(el => el.classList.remove('active'))
   document.getElementById(`view-${v}`).classList.add('active')
   document.getElementById(`nav-${v}`)?.classList.add('active')
+  if (v === 'reels') renderIgPosts()
 }
 
 // ── CALENDAR ──────────────────────────────────────────────────────
@@ -881,7 +1044,58 @@ async function deletePost() {
   closeModal('postModal'); renderCalendar(); toast('Post removed.','ok')
 }
 
-// ── GOOGLE ────────────────────────────────────────────────────────
+// ── INSTAGRAM ─────────────────────────────────────────────────────
+async function saveIgCreds() {
+  const u = document.getElementById('ig-username').value.trim()
+  const t = document.getElementById('ig-token').value.trim()
+  if (!u || !t) { toast('Enter both username and token.','err'); return }
+  if (window.op) {
+    await window.op.store.set('igUsername', u)
+    await window.op.store.set('igToken', t)
+  }
+  setIgBadge(true)
+  document.getElementById('igSavedLabel').textContent = `Connected as ${u}`
+  toast('Instagram credentials saved!','ok')
+}
+
+async function clearIgCreds() {
+  if (window.op) {
+    await window.op.store.delete('igUsername')
+    await window.op.store.delete('igToken')
+  }
+  document.getElementById('ig-username').value = ''
+  document.getElementById('ig-token').value = ''
+  document.getElementById('igSavedLabel').textContent = ''
+  setIgBadge(false)
+  toast('Instagram disconnected.','ok')
+}
+
+function setIgBadge(on) {
+  const b = document.getElementById('igStatusBadge')
+  if (!b) return
+  b.textContent = on ? '● Connected' : '● Not Connected'
+  b.className = `badge ${on ? 'on' : 'off'}`
+}
+
+function renderIgPosts() {
+  const el = document.getElementById('igPostsList'); if (!el) return
+  const posts = S.posts.filter(p => p.platform === 'reels' || p.platform === 'both')
+  if (!posts.length) {
+    el.innerHTML = `<div class="empty-st"><div class="empty-ic">🎞️</div><div style="font-size:13px">No Reels scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Reel</div></div>`
+    return
+  }
+  el.innerHTML = posts.sort((a,b) => a.date.localeCompare(b.date)).map(p => `
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:11px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--reels);flex-shrink:0"></div>
+      <div style="flex:1;min-width:0">
+        <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.title}</div>
+        <div style="font-size:11px;color:var(--muted);margin-top:2px">${p.date} at ${p.time}</div>
+      </div>
+      <button onclick="showPost('${p.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:6px;transition:all var(--ease)" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='none'">View</button>
+    </div>`).join('')
+}
+
+
 async function saveGoogleCreds() {
   const id = document.getElementById('s-gcid').value.trim(), sec = document.getElementById('s-gcsecret').value.trim()
   if (!id||!sec) { toast('Enter both credentials.','err'); return }
