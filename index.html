@@ -10,6 +10,7 @@
   --bg: #0d0d14; --surface: #13131f; --card: #1a1a2e;
   --border: #232338; --border-light: #2e2e48;
   --primary: #8b5cf6; --primary-h: #7c3aed; --primary-s: rgba(139,92,246,0.14);
+  --tiktok: #ff0050; --tiktok-s: rgba(255,0,80,0.13);
   --reels: #c026d3; --reels-s: rgba(192,38,211,0.14);
   --shorts: #ef4444; --shorts-s: rgba(239,68,68,0.13);
   --both: #f59e0b; --both-s: rgba(245,158,11,0.14);
@@ -73,9 +74,10 @@ body { font-family: -apple-system,'Segoe UI',system-ui,sans-serif; background: v
 .day.today .dn { background: var(--primary); color: #fff; width: 22px; height: 22px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .dn { font-size: 12px; font-weight: 600; color: var(--dim); width: 22px; height: 22px; display: flex; align-items: center; justify-content: center; margin-bottom: 3px; }
 .pill { font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; font-weight: 500; }
-.pill.reels  { background: var(--reels-s);  color: var(--reels); }
-.pill.shorts { background: var(--shorts-s); color: var(--shorts); }
-.pill.both   { background: var(--both-s);   color: var(--both); }
+.pill.reels   { background: var(--reels-s);  color: var(--reels); }
+.pill.shorts  { background: var(--shorts-s); color: var(--shorts); }
+.pill.tiktok  { background: var(--tiktok-s); color: var(--tiktok); }
+.pill.both    { background: var(--both-s);   color: var(--both); }
 .legend { display: flex; gap: 14px; align-items: center; }
 .leg { display: flex; align-items: center; gap: 5px; font-size: 12px; color: var(--dim); }
 .leg-dot { width: 8px; height: 8px; border-radius: 50%; }
@@ -92,9 +94,10 @@ body { font-family: -apple-system,'Segoe UI',system-ui,sans-serif; background: v
 .sel option { background: var(--card); }
 .plat-row { display: flex; gap: 7px; }
 .ptog { flex: 1; padding: 8px; border-radius: var(--rs); border: 1px solid var(--border); background: var(--surface); color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer; text-align: center; transition: all var(--ease); }
-.ptog.reels.active  { border-color: var(--reels);  background: var(--reels-s);  color: var(--reels); }
-.ptog.shorts.active { border-color: var(--shorts); background: var(--shorts-s); color: var(--shorts); }
-.ptog.both.active   { border-color: var(--both);   background: var(--both-s);   color: var(--both); }
+.ptog.tiktok.active  { border-color: var(--tiktok);  background: var(--tiktok-s);  color: var(--tiktok); }
+.ptog.reels.active   { border-color: var(--reels);   background: var(--reels-s);   color: var(--reels); }
+.ptog.shorts.active  { border-color: var(--shorts);  background: var(--shorts-s);  color: var(--shorts); }
+.ptog.both.active    { border-color: var(--both);    background: var(--both-s);    color: var(--both); }
 .gen-btn { width: 100%; padding: 11px; border-radius: var(--rs); border: none; background: linear-gradient(135deg, var(--primary), var(--reels)); color: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: opacity var(--ease); display: flex; align-items: center; justify-content: center; gap: 7px; }
 .gen-btn:hover { opacity: .88; }
 .gen-btn:disabled { opacity: .45; cursor: not-allowed; }
@@ -115,8 +118,8 @@ body { font-family: -apple-system,'Segoe UI',system-ui,sans-serif; background: v
 .save-btn { padding: 9px 18px; border-radius: var(--rs); border: none; background: var(--primary); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; transition: opacity var(--ease); }
 .save-btn:hover { opacity: .85; }
 .badge { display: inline-flex; align-items: center; gap: 5px; font-size: 12px; padding: 4px 10px; border-radius: 20px; font-weight: 600; }
-.badge.on  { background: rgba(16,185,129,.14); color: var(--success); }
-.badge.off { background: rgba(239,68,68,.1);   color: var(--shorts); }
+.badge.on   { background: rgba(16,185,129,.14); color: var(--success); }
+.badge.off  { background: rgba(239,68,68,.1);   color: var(--shorts); }
 .badge.warn { background: rgba(245,158,11,.14); color: var(--warn); }
 .prog-bar { width: 100%; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; margin-top: 10px; }
 .prog-fill { height: 100%; background: linear-gradient(90deg, var(--primary), var(--reels)); border-radius: 3px; transition: width .3s ease; }
@@ -124,7 +127,7 @@ body { font-family: -apple-system,'Segoe UI',system-ui,sans-serif; background: v
 .model-name { font-size: 13px; font-weight: 600; }
 .model-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
 
-/* SETUP WIZARD */
+/* WIZARD */
 .wizard-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: flex; align-items: center; justify-content: center; z-index: 900; }
 .wizard { background: var(--card); border: 1px solid var(--border-light); border-radius: 16px; padding: 36px; width: 500px; max-width: 92vw; box-shadow: var(--shadow); }
 .wiz-logo { width: 52px; height: 52px; border-radius: 13px; background: linear-gradient(135deg, var(--primary), var(--reels)); margin: 0 auto 18px; }
@@ -155,8 +158,8 @@ body { font-family: -apple-system,'Segoe UI',system-ui,sans-serif; background: v
 /* TOAST */
 .toasts { position: fixed; bottom: 22px; right: 22px; display: flex; flex-direction: column; gap: 8px; z-index: 2000; }
 .toast { background: var(--card); border: 1px solid var(--border-light); border-radius: var(--rs); padding: 11px 16px; font-size: 13px; min-width: 210px; box-shadow: var(--shadow); animation: tIn .18s ease; }
-.toast.ok  { border-left: 3px solid var(--success); }
-.toast.err { border-left: 3px solid var(--shorts); }
+.toast.ok   { border-left: 3px solid var(--success); }
+.toast.err  { border-left: 3px solid var(--shorts); }
 .toast.warn { border-left: 3px solid var(--warn); }
 @keyframes tIn { from { transform: translateX(16px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
 
@@ -167,19 +170,11 @@ body { font-family: -apple-system,'Segoe UI',system-ui,sans-serif; background: v
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 3px; }
 input[type="date"], input[type="time"] { color-scheme: dark; }
-.theme-opt {
-  border-radius: var(--rs); border: 1.5px solid var(--border);
-  overflow: hidden; cursor: pointer; transition: border-color var(--ease);
-}
+.theme-opt { border-radius: var(--rs); border: 1.5px solid var(--border); overflow: hidden; cursor: pointer; transition: border-color var(--ease); }
 .theme-opt:hover { border-color: var(--border-light); }
 .theme-opt.active { border-color: var(--primary); }
-.theme-preview {
-  height: 52px; background: var(--bg); display: flex; overflow: hidden;
-}
-.theme-opt-label {
-  padding: 6px 9px; font-size: 12px; font-weight: 600;
-  background: var(--surface); color: var(--dim);
-}
+.theme-preview { height: 52px; background: var(--bg); display: flex; overflow: hidden; }
+.theme-opt-label { padding: 6px 9px; font-size: 12px; font-weight: 600; background: var(--surface); color: var(--dim); }
 </style>
 </head>
 <body>
@@ -190,34 +185,9 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
     <div class="wiz-logo"></div>
     <div class="wiz-title">Welcome to OpenPlanner</div>
     <div class="wiz-sub">OpenPlanner runs AI entirely on your device using Ollama.<br>Let's get you set up — it only takes a few minutes.</div>
-
-    <div class="step" id="wiz-step1">
-      <div class="step-num" id="wiz-n1">1</div>
-      <div class="step-body">
-        <div class="step-ttl">Install Ollama</div>
-        <div class="step-desc">Ollama is a free, open-source local AI runner. Click below to download it, install it, then come back here.</div>
-        <button style="margin-top:8px;padding:6px 14px;border-radius:6px;border:1px solid var(--primary);background:var(--primary-s);color:var(--primary);font-size:12px;font-weight:600;cursor:pointer" onclick="openOllama()">Download Ollama →</button>
-      </div>
-    </div>
-
-    <div class="step" id="wiz-step2">
-      <div class="step-num" id="wiz-n2">2</div>
-      <div class="step-body">
-        <div class="step-ttl">Download Llama 3 <span style="color:var(--muted);font-weight:400">(~4.7 GB)</span></div>
-        <div class="step-desc" id="wiz-pull-desc">Once Ollama is running, OpenPlanner will automatically download the Llama 3 model for you.</div>
-        <div class="prog-bar" id="wiz-prog-wrap" style="display:none"><div class="prog-fill" id="wiz-prog" style="width:0%"></div></div>
-        <div style="font-size:11px;color:var(--muted);margin-top:6px" id="wiz-pull-status"></div>
-      </div>
-    </div>
-
-    <div class="step" id="wiz-step3">
-      <div class="step-num" id="wiz-n3">3</div>
-      <div class="step-body">
-        <div class="step-ttl">All Set!</div>
-        <div class="step-desc">OpenPlanner is ready. Everything runs locally — no subscriptions, no data sharing, no costs.</div>
-      </div>
-    </div>
-
+    <div class="step"><div class="step-num" id="wiz-n1">1</div><div class="step-body"><div class="step-ttl">Install Ollama</div><div class="step-desc">Ollama is a free, open-source local AI runner. Click below to download it, install it, then come back here.</div><button style="margin-top:8px;padding:6px 14px;border-radius:6px;border:1px solid var(--primary);background:var(--primary-s);color:var(--primary);font-size:12px;font-weight:600;cursor:pointer" onclick="openOllama()">Download Ollama →</button></div></div>
+    <div class="step"><div class="step-num" id="wiz-n2">2</div><div class="step-body"><div class="step-ttl">Download Llama 3 <span style="color:var(--muted);font-weight:400">(~4.7 GB)</span></div><div class="step-desc" id="wiz-pull-desc">Once Ollama is running, OpenPlanner will automatically download the Llama 3 model for you.</div><div class="prog-bar" id="wiz-prog-wrap" style="display:none"><div class="prog-fill" id="wiz-prog" style="width:0%"></div></div><div style="font-size:11px;color:var(--muted);margin-top:6px" id="wiz-pull-status"></div></div></div>
+    <div class="step"><div class="step-num" id="wiz-n3">3</div><div class="step-body"><div class="step-ttl">All Set!</div><div class="step-desc">OpenPlanner is ready. Everything runs locally — no subscriptions, no data sharing, no costs.</div></div></div>
     <button class="wiz-btn" id="wizBtn" onclick="wizardNext()">Check for Ollama</button>
     <button class="wiz-skip" onclick="dismissWizard()">Skip setup — I'll configure this later</button>
   </div>
@@ -225,10 +195,7 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
 
 <!-- TITLEBAR -->
 <div class="tb">
-  <div class="tb-left">
-    <div class="tb-logo"></div>
-    <span class="tb-name">OpenPlanner</span>
-  </div>
+  <div class="tb-left"><div class="tb-logo"></div><span class="tb-name">OpenPlanner</span></div>
   <div class="tb-btns">
     <button class="tb-btn btn-x" onclick="window.op?.win.close()"></button>
     <button class="tb-btn btn-m" onclick="window.op?.win.minimize()"></button>
@@ -247,19 +214,16 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
     </div>
     <div style="margin-top:10px;margin-bottom:6px">
       <div class="sec-label">Platforms</div>
-      <button class="nav" id="nav-reels" onclick="switchView('reels')"><span class="ic">🎞️</span> Instagram Reels</button>
-      <button class="nav" id="nav-shorts" onclick="switchView('shorts')"><span class="ic">🎬</span> YouTube Shorts</button>
+      <button class="nav" id="nav-tiktok"  onclick="switchView('tiktok')"><span class="ic">🎵</span> TikTok</button>
+      <button class="nav" id="nav-shorts"  onclick="switchView('shorts')"><span class="ic">🎬</span> YouTube Shorts</button>
+      <button class="nav" id="nav-reels"   onclick="switchView('reels')"><span class="ic">🎞️</span> Instagram Reels</button>
     </div>
     <div class="sb-footer">
-      <button class="nav" id="nav-settings" onclick="switchView('settings')">
-        <span class="ic">⚙️</span> Settings
-        <div class="ollama-dot" id="ollamaDot"></div>
-      </button>
+      <button class="nav" id="nav-settings" onclick="switchView('settings')"><span class="ic">⚙️</span> Settings<div class="ollama-dot" id="ollamaDot"></div></button>
       <div class="sb-tag">OpenPlanner v1.0.0 · Open Source · MIT</div>
     </div>
   </nav>
 
-  <!-- CONTENT -->
   <div class="main">
 
     <!-- CALENDAR VIEW -->
@@ -267,9 +231,9 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
       <div class="ch">
         <div><div class="ch-title">Content Calendar</div><div class="ch-sub">Click any day to schedule a post</div></div>
         <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:var(--reels)"></div>Reels</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--tiktok)"></div>TikTok</div>
           <div class="leg"><div class="leg-dot" style="background:var(--shorts)"></div>Shorts</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--both)"></div>Both</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--reels)"></div>Reels</div>
         </div>
       </div>
       <div class="cal-wrap">
@@ -287,25 +251,23 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
 
     <!-- COMPOSER VIEW -->
     <div class="view" id="view-composer">
-      <div class="ch">
-        <div><div class="ch-title">AI Composer</div><div class="ch-sub" id="composerSub">Powered by Llama 3 — running locally on your device</div></div>
-      </div>
+      <div class="ch"><div><div class="ch-title">AI Composer</div><div class="ch-sub">Powered by Llama 3 — running locally on your device</div></div></div>
       <div class="comp-wrap">
         <div class="panel">
           <div class="panel-ttl">✦ Content Details</div>
           <div class="fg">
             <label class="lbl">Platform</label>
             <div class="plat-row">
-              <button class="ptog reels active" id="pt-reels"  onclick="setPlatform('reels')">🎞️ Reels</button>
-              <button class="ptog shorts"       id="pt-shorts" onclick="setPlatform('shorts')">🎬 Shorts</button>
-              <button class="ptog both"         id="pt-both"   onclick="setPlatform('both')">✦ Both</button>
+              <button class="ptog tiktok"  id="pt-tiktok"  onclick="setPlatform('tiktok')">🎵 TikTok</button>
+              <button class="ptog shorts"  id="pt-shorts"  onclick="setPlatform('shorts')">🎬 Shorts</button>
+              <button class="ptog reels active" id="pt-reels" onclick="setPlatform('reels')">🎞️ Reels</button>
+              <button class="ptog both"    id="pt-both"    onclick="setPlatform('both')">✦ All</button>
             </div>
           </div>
           <div class="fg"><label class="lbl">Brand / Creator Name</label><input class="inp" id="f-brand" placeholder="e.g. The Daily Grind Coffee" /></div>
           <div class="fg"><label class="lbl">Niche / Industry</label><input class="inp" id="f-niche" placeholder="e.g. fitness, cooking, personal finance" /></div>
           <div class="fg"><label class="lbl">Target Audience</label><input class="inp" id="f-audience" placeholder="e.g. millennials interested in budgeting" /></div>
-          <div class="fg">
-            <label class="lbl">Tone & Voice</label>
+          <div class="fg"><label class="lbl">Tone & Voice</label>
             <select class="sel" id="f-tone">
               <option value="authentic">Authentic / Raw</option>
               <option value="educational">Educational</option>
@@ -315,8 +277,7 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
               <option value="bold">Bold / Edgy</option>
             </select>
           </div>
-          <div class="fg">
-            <label class="lbl">Campaign Goal</label>
+          <div class="fg"><label class="lbl">Campaign Goal</label>
             <select class="sel" id="f-goal">
               <option value="grow followers">Grow Followers</option>
               <option value="drive traffic">Drive Traffic</option>
@@ -328,41 +289,166 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
           <div class="fg"><label class="lbl">Content Idea / Topic</label><textarea class="ta" id="f-input" placeholder="Describe your idea, drop a topic, or paste a URL to repurpose..."></textarea></div>
           <button class="gen-btn" id="genBtn" onclick="generate()"><span>✦</span> Generate with Llama 3</button>
         </div>
-
         <div class="panel">
           <div class="panel-ttl">⚡ Generated Content</div>
-          <div id="outputArea">
-            <div class="empty-st"><div class="empty-ic">✦</div><div style="font-size:13px">Generated content will appear here</div></div>
+          <div id="outputArea"><div class="empty-st"><div class="empty-ic">✦</div><div style="font-size:13px">Generated content will appear here</div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== TIKTOK VIEW ===================== -->
+    <div class="view" id="view-tiktok">
+      <div class="ch">
+        <div><div class="ch-title">🎵 TikTok</div><div class="ch-sub">Manage your TikTok connection, schedule, and posting strategy</div></div>
+        <span class="badge off" id="ttStatusBadge">● Not Connected</span>
+      </div>
+      <div style="flex:1;overflow:auto;padding:0 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-content:start">
+
+        <div class="panel" style="grid-column:1/-1">
+          <div class="panel-ttl">🔗 Connect TikTok Account</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">
+            Save your TikTok credentials locally. Your credentials never leave your device.
+            To get API access, apply for the TikTok Content Posting API via the TikTok Developer Portal. Note: TikTok requires an app review process before auto-posting is enabled.
+            <a href="#" style="color:var(--primary);text-decoration:none;margin-left:4px" onclick="window.op?.shell.open('https://developers.tiktok.com/products/content-posting-api')">Setup guide →</a>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+            <div class="fg" style="margin:0"><label class="lbl">TikTok Username</label><input class="inp" id="tt-username" placeholder="@yourusername" /></div>
+            <div class="fg" style="margin:0"><label class="lbl">Access Token</label><input class="inp" type="password" id="tt-token" placeholder="act.xxxxxxxxxxxxxxx..." /></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="save-btn" onclick="saveTtCreds()">Save Credentials</button>
+            <button class="save-btn" style="background:var(--card);border:1px solid var(--border);color:var(--text)" onclick="clearTtCreds()">Disconnect</button>
+            <span style="font-size:12px;color:var(--muted)" id="ttSavedLabel"></span>
+          </div>
+          <div style="margin-top:14px;padding:12px;background:rgba(255,0,80,0.07);border:1px solid rgba(255,0,80,0.2);border-radius:var(--rs)">
+            <div style="font-size:12px;color:var(--tiktok);font-weight:600;margin-bottom:4px">⚠️ TikTok API Note</div>
+            <div style="font-size:12px;color:var(--muted);line-height:1.6">TikTok's Content Posting API requires an official app review before auto-posting works. Start the application process early — it can take several weeks to be approved.</div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-ttl">📅 Scheduled TikToks</div>
+          <div id="ttPostsList">
+            <div class="empty-st"><div class="empty-ic">🎵</div><div style="font-size:13px">No TikToks scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a TikTok</div></div>
+          </div>
+          <button class="gen-btn" style="margin-top:14px;font-size:13px;background:linear-gradient(135deg,var(--tiktok),#cc0040)" onclick="switchView('composer')">✦ Compose a New TikTok</button>
+        </div>
+
+        <div class="panel">
+          <div class="panel-ttl">⏰ Best Posting Times</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">Based on TikTok algorithm best practices. Adjust based on your TikTok Analytics.</div>
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Top Days</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span style="padding:5px 12px;border-radius:20px;background:var(--tiktok-s);color:var(--tiktok);font-size:12px;font-weight:600">Tue</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--tiktok-s);color:var(--tiktok);font-size:12px;font-weight:600">Thu</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--tiktok-s);color:var(--tiktok);font-size:12px;font-weight:600">Fri</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--tiktok-s);color:var(--tiktok);font-size:12px;font-weight:600">Sat</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Mon</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Wed</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Sun</span>
+            </div>
+          </div>
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Peak Windows</div>
+            <div style="margin-bottom:10px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">7:00 – 9:00 AM</span><span style="color:var(--muted)">Morning peak</span></div>
+              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:80%;background:linear-gradient(90deg,var(--tiktok),#cc0040);border-radius:3px"></div></div>
+            </div>
+            <div style="margin-bottom:10px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">7:00 – 9:00 PM</span><span style="color:var(--muted)">Evening peak</span></div>
+              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:95%;background:linear-gradient(90deg,var(--tiktok),#cc0040);border-radius:3px"></div></div>
+            </div>
+            <div style="margin-bottom:10px">
+              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">12:00 – 3:00 PM</span><span style="color:var(--muted)">Lunch window</span></div>
+              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:70%;background:linear-gradient(90deg,var(--tiktok),#cc0040);border-radius:3px"></div></div>
+            </div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Quick Tips</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">⚡ 21–34 seconds is the sweet spot for completion rate</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">🎵 Use trending audio — it dramatically boosts reach</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">✂️ Jump cuts every 2–3 seconds keep retention high</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">📅 Post 1–3x per day to maximize algorithm exposure</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0">🤝 Duets and Stitches expand your reach significantly</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- ======================================================= -->
+
+    <!-- YOUTUBE SHORTS VIEW -->
+    <div class="view" id="view-shorts">
+      <div class="ch">
+        <div><div class="ch-title">🎬 YouTube Shorts</div><div class="ch-sub">Manage your Shorts connection, schedule, and posting strategy</div></div>
+        <span class="badge off" id="ytStatusBadge">● Not Connected</span>
+      </div>
+      <div style="flex:1;overflow:auto;padding:0 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-content:start">
+        <div class="panel" style="grid-column:1/-1">
+          <div class="panel-ttl">🔗 Connect YouTube Account</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">Save your YouTube channel credentials locally. Your credentials never leave your device. To get API access, create a Google Cloud project, enable the YouTube Data API v3, and generate an OAuth 2.0 Client ID.<a href="#" style="color:var(--primary);text-decoration:none;margin-left:4px" onclick="window.op?.shell.open('https://developers.google.com/youtube/v3/getting-started')">Setup guide →</a></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
+            <div class="fg" style="margin:0"><label class="lbl">Channel Name</label><input class="inp" id="yt-channel" placeholder="@yourchannel" /></div>
+            <div class="fg" style="margin:0"><label class="lbl">API Key / OAuth Token</label><input class="inp" type="password" id="yt-token" placeholder="AIzaxxxxxxxxxxxxxxx..." /></div>
+          </div>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <button class="save-btn" onclick="saveYtCreds()">Save Credentials</button>
+            <button class="save-btn" style="background:var(--card);border:1px solid var(--border);color:var(--text)" onclick="clearYtCreds()">Disconnect</button>
+            <span style="font-size:12px;color:var(--muted)" id="ytSavedLabel"></span>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="panel-ttl">📅 Scheduled Shorts</div>
+          <div id="ytPostsList"><div class="empty-st"><div class="empty-ic">🎬</div><div style="font-size:13px">No Shorts scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Short</div></div></div>
+          <button class="gen-btn" style="margin-top:14px;font-size:13px;background:linear-gradient(135deg,var(--shorts),#b91c1c)" onclick="switchView('composer')">✦ Compose a New Short</button>
+        </div>
+        <div class="panel">
+          <div class="panel-ttl">⏰ Best Posting Times</div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">Based on YouTube Shorts algorithm best practices. Adjust based on your YouTube Studio analytics.</div>
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Top Days</div>
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <span style="padding:5px 12px;border-radius:20px;background:var(--shorts-s);color:var(--shorts);font-size:12px;font-weight:600">Mon</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--shorts-s);color:var(--shorts);font-size:12px;font-weight:600">Tue</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--shorts-s);color:var(--shorts);font-size:12px;font-weight:600">Thu</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--shorts-s);color:var(--shorts);font-size:12px;font-weight:600">Sat</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Wed</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Fri</span>
+              <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Sun</span>
+            </div>
+          </div>
+          <div style="margin-bottom:16px">
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Peak Windows</div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">8:00 – 10:00 AM</span><span style="color:var(--muted)">Morning peak</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:85%;background:linear-gradient(90deg,var(--shorts),#b91c1c);border-radius:3px"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">5:00 – 7:00 PM</span><span style="color:var(--muted)">Evening peak</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:95%;background:linear-gradient(90deg,var(--shorts),#b91c1c);border-radius:3px"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">12:00 – 2:00 PM</span><span style="color:var(--muted)">Lunch window</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:60%;background:linear-gradient(90deg,var(--shorts),#b91c1c);border-radius:3px"></div></div></div>
+          </div>
+          <div>
+            <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Quick Tips</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">⚡ Keep it under 60s — the algorithm strictly enforces this</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">🪝 Deliver the payoff in the first 3 seconds — no slow intros</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">🔁 Loop endings dramatically increase replay rate</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">#️⃣ Always include #Shorts in your description</div>
+            <div style="font-size:12px;color:var(--dim);padding:6px 0">📝 Front-load your keyword in the title for SEO</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- REELS VIEW -->
+    <!-- INSTAGRAM REELS VIEW -->
     <div class="view" id="view-reels">
       <div class="ch">
         <div><div class="ch-title">🎞️ Instagram Reels</div><div class="ch-sub">Manage your Reels connection, schedule, and posting strategy</div></div>
         <span class="badge off" id="igStatusBadge">● Not Connected</span>
       </div>
       <div style="flex:1;overflow:auto;padding:0 28px 28px;display:grid;grid-template-columns:1fr 1fr;gap:18px;align-content:start">
-
-        <!-- Connect Account -->
         <div class="panel" style="grid-column:1/-1">
           <div class="panel-ttl">🔗 Connect Instagram Account</div>
-          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">
-            Save your Instagram username and access token locally. Your credentials never leave your device.
-            To get an access token, create a Meta Developer app and generate a long-lived token via the Instagram Graph API.
-            <a href="#" style="color:var(--primary);text-decoration:none;margin-left:4px" onclick="window.op?.shell.open('https://developers.facebook.com/docs/instagram-api/getting-started')">Setup guide →</a>
-          </div>
+          <div style="font-size:12px;color:var(--muted);margin-bottom:16px;line-height:1.6">Save your Instagram username and access token locally. Your credentials never leave your device. To get an access token, create a Meta Developer app and generate a long-lived token via the Instagram Graph API.<a href="#" style="color:var(--primary);text-decoration:none;margin-left:4px" onclick="window.op?.shell.open('https://developers.facebook.com/docs/instagram-api/getting-started')">Setup guide →</a></div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px">
-            <div class="fg" style="margin:0">
-              <label class="lbl">Instagram Username</label>
-              <input class="inp" id="ig-username" placeholder="@yourusername" />
-            </div>
-            <div class="fg" style="margin:0">
-              <label class="lbl">Access Token</label>
-              <input class="inp" type="password" id="ig-token" placeholder="EAAxxxxxxxxxxxxxxx..." />
-            </div>
+            <div class="fg" style="margin:0"><label class="lbl">Instagram Username</label><input class="inp" id="ig-username" placeholder="@yourusername" /></div>
+            <div class="fg" style="margin:0"><label class="lbl">Access Token</label><input class="inp" type="password" id="ig-token" placeholder="EAAxxxxxxxxxxxxxxx..." /></div>
           </div>
           <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
             <button class="save-btn" onclick="saveIgCreds()">Save Credentials</button>
@@ -370,21 +456,14 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
             <span style="font-size:12px;color:var(--muted)" id="igSavedLabel"></span>
           </div>
         </div>
-
-        <!-- Scheduled Reels -->
         <div class="panel">
           <div class="panel-ttl">📅 Scheduled Reels</div>
-          <div id="igPostsList">
-            <div class="empty-st"><div class="empty-ic">🎞️</div><div style="font-size:13px">No Reels scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Reel</div></div>
-          </div>
+          <div id="igPostsList"><div class="empty-st"><div class="empty-ic">🎞️</div><div style="font-size:13px">No Reels scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Reel</div></div></div>
           <button class="gen-btn" style="margin-top:14px;font-size:13px" onclick="switchView('composer')">✦ Compose a New Reel</button>
         </div>
-
-        <!-- Best Posting Times -->
         <div class="panel">
           <div class="panel-ttl">⏰ Best Posting Times</div>
           <div style="font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6">Based on general Instagram Reels best practices. Adjust based on your audience analytics.</div>
-
           <div style="margin-bottom:16px">
             <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Top Days</div>
             <div style="display:flex;gap:6px;flex-wrap:wrap">
@@ -397,38 +476,12 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
               <span style="padding:5px 12px;border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px">Sun</span>
             </div>
           </div>
-
           <div style="margin-bottom:16px">
             <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Peak Windows</div>
-            <div style="margin-bottom:10px">
-              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
-                <span style="font-weight:600;color:var(--text)">9:00 – 11:00 AM</span>
-                <span style="color:var(--muted)">Morning peak</span>
-              </div>
-              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
-                <div style="height:100%;width:90%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div>
-              </div>
-            </div>
-            <div style="margin-bottom:10px">
-              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
-                <span style="font-weight:600;color:var(--text)">7:00 – 9:00 PM</span>
-                <span style="color:var(--muted)">Evening peak</span>
-              </div>
-              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
-                <div style="height:100%;width:95%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div>
-              </div>
-            </div>
-            <div style="margin-bottom:10px">
-              <div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px">
-                <span style="font-weight:600;color:var(--text)">12:00 – 1:00 PM</span>
-                <span style="color:var(--muted)">Lunch window</span>
-              </div>
-              <div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden">
-                <div style="height:100%;width:65%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div>
-              </div>
-            </div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">9:00 – 11:00 AM</span><span style="color:var(--muted)">Morning peak</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:90%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">7:00 – 9:00 PM</span><span style="color:var(--muted)">Evening peak</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:95%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:4px"><span style="font-weight:600;color:var(--text)">12:00 – 1:00 PM</span><span style="color:var(--muted)">Lunch window</span></div><div style="height:6px;background:var(--border);border-radius:3px;overflow:hidden"><div style="height:100%;width:65%;background:linear-gradient(90deg,var(--primary),var(--reels));border-radius:3px"></div></div></div>
           </div>
-
           <div>
             <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--dim);margin-bottom:8px">Quick Tips</div>
             <div style="font-size:12px;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--border)">🪝 Hook viewers in the first 1–3 seconds</div>
@@ -438,35 +491,17 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
             <div style="font-size:12px;color:var(--dim);padding:6px 0">📣 End with a clear CTA — save, share, or comment</div>
           </div>
         </div>
-
       </div>
     </div>
 
-    <!-- SHORTS VIEW -->
-    <div class="view" id="view-shorts">
-      <div class="ch">
-        <div><div class="ch-title">🎬 YouTube Shorts</div><div class="ch-sub">Coming soon</div></div>
-      </div>
-      <div style="flex:1;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:12px;color:var(--muted)">
-        <div style="font-size:40px">🎬</div>
-        <div style="font-size:15px;font-weight:600;color:var(--dim)">YouTube Shorts Dashboard</div>
-        <div style="font-size:13px">Coming in a future update</div>
-        <button class="gen-btn" style="width:auto;padding:10px 24px;margin-top:8px;font-size:13px" onclick="switchView('composer')">✦ Compose a Short</button>
-      </div>
-    </div>
-
-    
+    <!-- SETTINGS VIEW -->
     <div class="view" id="view-settings">
       <div class="ch"><div><div class="ch-title">Settings</div><div class="ch-sub">All data stored locally on your device</div></div></div>
       <div class="set-wrap">
-
         <div class="set-card">
           <div class="set-ttl">🤖 AI Engine — Ollama + Llama 3</div>
           <div class="set-desc">OpenPlanner runs AI 100% locally using Ollama. No API keys, no costs, no data ever leaves your device.</div>
-          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px">
-            <span class="badge off" id="ollamaBadge">● Ollama Offline</span>
-            <span style="font-size:12px;color:var(--muted)" id="ollamaModelLabel"></span>
-          </div>
+          <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px"><span class="badge off" id="ollamaBadge">● Ollama Offline</span><span style="font-size:12px;color:var(--muted)" id="ollamaModelLabel"></span></div>
           <div id="modelList" style="margin-bottom:12px"></div>
           <div style="display:flex;gap:9px;flex-wrap:wrap">
             <button class="save-btn" onclick="checkOllama()">Refresh Status</button>
@@ -476,7 +511,6 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
           <div class="prog-bar" id="set-prog-wrap" style="display:none;margin-top:12px"><div class="prog-fill" id="set-prog" style="width:0%"></div></div>
           <div style="font-size:11px;color:var(--muted);margin-top:6px" id="set-pull-status"></div>
         </div>
-
         <div class="set-card">
           <div class="set-ttl">📅 Google Calendar Integration</div>
           <div class="set-desc">Create a Google Cloud project, enable the Calendar API, and create OAuth 2.0 Desktop App credentials.</div>
@@ -489,80 +523,23 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
           </div>
           <div id="gcCodeArea" style="display:none;margin-top:14px">
             <div class="set-desc" style="margin-bottom:8px">Paste the authorization code from your browser:</div>
-            <div style="display:flex;gap:8px">
-              <input class="inp" id="s-gccode" placeholder="Paste code here..." />
-              <button class="save-btn" onclick="exchangeCode()">Confirm</button>
-            </div>
+            <div style="display:flex;gap:8px"><input class="inp" id="s-gccode" placeholder="Paste code here..." /><button class="save-btn" onclick="exchangeCode()">Confirm</button></div>
           </div>
         </div>
-
         <div class="set-card">
           <div class="set-ttl">🎨 Theme</div>
           <div class="set-desc">Choose a color theme. Your selection is saved locally and applied on every launch.</div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px" id="themeGrid">
-            <div class="theme-opt" data-theme="midnight" onclick="applyTheme('midnight')">
-              <div class="theme-preview">
-                <div style="width:18px;height:100%;background:#13131f;border-right:1px solid #232338;flex-shrink:0"></div>
-                <div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px">
-                  <div style="height:5px;border-radius:2px;background:#2e2e48;width:70%"></div>
-                  <div style="height:5px;border-radius:2px;background:#8b5cf6;width:45%"></div>
-                  <div style="display:flex;gap:3px;margin-top:1px">
-                    <div style="height:5px;border-radius:2px;background:rgba(192,38,211,0.5);width:22px"></div>
-                    <div style="height:5px;border-radius:2px;background:rgba(239,68,68,0.4);width:16px"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="theme-opt-label">Midnight</div>
-            </div>
-            <div class="theme-opt" data-theme="nord" onclick="applyTheme('nord')">
-              <div class="theme-preview" style="background:#242933">
-                <div style="width:18px;height:100%;background:#2e3440;border-right:1px solid #3b4252;flex-shrink:0"></div>
-                <div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px">
-                  <div style="height:5px;border-radius:2px;background:#4c566a;width:70%"></div>
-                  <div style="height:5px;border-radius:2px;background:#5e81ac;width:45%"></div>
-                  <div style="display:flex;gap:3px;margin-top:1px">
-                    <div style="height:5px;border-radius:2px;background:rgba(136,192,208,0.5);width:22px"></div>
-                    <div style="height:5px;border-radius:2px;background:rgba(163,190,140,0.4);width:16px"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="theme-opt-label">Nord</div>
-            </div>
-            <div class="theme-opt" data-theme="sakura" onclick="applyTheme('sakura')">
-              <div class="theme-preview" style="background:#16101a">
-                <div style="width:18px;height:100%;background:#1e1224;border-right:1px solid #2e1a36;flex-shrink:0"></div>
-                <div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px">
-                  <div style="height:5px;border-radius:2px;background:#3d2248;width:70%"></div>
-                  <div style="height:5px;border-radius:2px;background:#e879a0;width:45%"></div>
-                  <div style="display:flex;gap:3px;margin-top:1px">
-                    <div style="height:5px;border-radius:2px;background:rgba(249,168,201,0.5);width:22px"></div>
-                    <div style="height:5px;border-radius:2px;background:rgba(192,132,252,0.4);width:16px"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="theme-opt-label">Sakura</div>
-            </div>
-            <div class="theme-opt" data-theme="slate" onclick="applyTheme('slate')">
-              <div class="theme-preview" style="background:#0e1117">
-                <div style="width:18px;height:100%;background:#161b22;border-right:1px solid #21262d;flex-shrink:0"></div>
-                <div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px">
-                  <div style="height:5px;border-radius:2px;background:#30363d;width:70%"></div>
-                  <div style="height:5px;border-radius:2px;background:#d97706;width:45%"></div>
-                  <div style="display:flex;gap:3px;margin-top:1px">
-                    <div style="height:5px;border-radius:2px;background:rgba(251,191,36,0.5);width:22px"></div>
-                    <div style="height:5px;border-radius:2px;background:rgba(248,113,113,0.4);width:16px"></div>
-                  </div>
-                </div>
-              </div>
-              <div class="theme-opt-label">Slate</div>
-            </div>
+            <div class="theme-opt" data-theme="midnight" onclick="applyTheme('midnight')"><div class="theme-preview"><div style="width:18px;height:100%;background:#13131f;border-right:1px solid #232338;flex-shrink:0"></div><div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px"><div style="height:5px;border-radius:2px;background:#2e2e48;width:70%"></div><div style="height:5px;border-radius:2px;background:#8b5cf6;width:45%"></div><div style="display:flex;gap:3px;margin-top:1px"><div style="height:5px;border-radius:2px;background:rgba(255,0,80,0.5);width:16px"></div><div style="height:5px;border-radius:2px;background:rgba(239,68,68,0.4);width:16px"></div><div style="height:5px;border-radius:2px;background:rgba(192,38,211,0.4);width:16px"></div></div></div></div><div class="theme-opt-label">Midnight</div></div>
+            <div class="theme-opt" data-theme="nord" onclick="applyTheme('nord')"><div class="theme-preview" style="background:#242933"><div style="width:18px;height:100%;background:#2e3440;border-right:1px solid #3b4252;flex-shrink:0"></div><div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px"><div style="height:5px;border-radius:2px;background:#4c566a;width:70%"></div><div style="height:5px;border-radius:2px;background:#5e81ac;width:45%"></div><div style="display:flex;gap:3px;margin-top:1px"><div style="height:5px;border-radius:2px;background:rgba(136,192,208,0.5);width:22px"></div><div style="height:5px;border-radius:2px;background:rgba(163,190,140,0.4);width:16px"></div></div></div></div><div class="theme-opt-label">Nord</div></div>
+            <div class="theme-opt" data-theme="sakura" onclick="applyTheme('sakura')"><div class="theme-preview" style="background:#16101a"><div style="width:18px;height:100%;background:#1e1224;border-right:1px solid #2e1a36;flex-shrink:0"></div><div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px"><div style="height:5px;border-radius:2px;background:#3d2248;width:70%"></div><div style="height:5px;border-radius:2px;background:#e879a0;width:45%"></div><div style="display:flex;gap:3px;margin-top:1px"><div style="height:5px;border-radius:2px;background:rgba(249,168,201,0.5);width:22px"></div><div style="height:5px;border-radius:2px;background:rgba(192,132,252,0.4);width:16px"></div></div></div></div><div class="theme-opt-label">Sakura</div></div>
+            <div class="theme-opt" data-theme="slate" onclick="applyTheme('slate')"><div class="theme-preview" style="background:#0e1117"><div style="width:18px;height:100%;background:#161b22;border-right:1px solid #21262d;flex-shrink:0"></div><div style="flex:1;padding:5px;display:flex;flex-direction:column;gap:3px"><div style="height:5px;border-radius:2px;background:#30363d;width:70%"></div><div style="height:5px;border-radius:2px;background:#d97706;width:45%"></div><div style="display:flex;gap:3px;margin-top:1px"><div style="height:5px;border-radius:2px;background:rgba(251,191,36,0.5);width:22px"></div><div style="height:5px;border-radius:2px;background:rgba(248,113,113,0.4);width:16px"></div></div></div></div><div class="theme-opt-label">Slate</div></div>
           </div>
         </div>
-
         <div class="set-card">
           <div class="set-ttl">✦ About OpenPlanner</div>
           <div class="set-desc">Free, open-source, locally-run social media planning. No subscriptions, no cloud sync, no paywalls — ever.</div>
-          <div style="font-size:12px;color:var(--muted)">v1.0.0 · MIT License · <a href="#" style="color:var(--primary);text-decoration:none" onclick="window.op?.shell.open('https://github.com/openplanner/openplanner')">GitHub</a></div>
+          <div style="font-size:12px;color:var(--muted)">v1.0.0 · MIT License · <a href="#" style="color:var(--primary);text-decoration:none" onclick="window.op?.shell.open('https://github.com/capo-dev/openplanner')">GitHub</a></div>
         </div>
       </div>
     </div>
@@ -581,9 +558,10 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
     </div>
     <div class="fg"><label class="lbl">Platform</label>
       <select class="sel" id="m-platform">
-        <option value="reels">Instagram Reels</option>
+        <option value="tiktok">TikTok</option>
         <option value="shorts">YouTube Shorts</option>
-        <option value="both">Both</option>
+        <option value="reels">Instagram Reels</option>
+        <option value="both">All Platforms</option>
       </select>
     </div>
     <div class="fg"><label class="lbl">Notes / Caption</label><textarea class="ta" id="m-notes" placeholder="Caption, hashtags, production reminders..." style="min-height:60px"></textarea></div>
@@ -609,7 +587,6 @@ input[type="date"], input[type="time"] { color-scheme: dark; }
 <div class="toasts" id="toasts"></div>
 
 <script>
-// ── STATE ─────────────────────────────────────────────────────────
 const IS_MAC = navigator.userAgent.includes('Macintosh')
 const S = {
   view: 'calendar', month: new Date().getMonth(), year: new Date().getFullYear(),
@@ -618,64 +595,24 @@ const S = {
   wizardStep: 1, pulling: false
 }
 if (IS_MAC) {
-  const tb = document.querySelector('.tb')
-  const btns = document.querySelector('.tb-btns')
-  const left = document.querySelector('.tb-left')
-  btns.style.order = '-1'
-  btns.style.marginRight = '10px'
-  left.style.flex = '1'
-  tb.style.paddingLeft = '10px'
+  const tb = document.querySelector('.tb'), btns = document.querySelector('.tb-btns'), left = document.querySelector('.tb-left')
+  btns.style.order = '-1'; btns.style.marginRight = '10px'; left.style.flex = '1'; tb.style.paddingLeft = '10px'
 }
 const MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December']
 
-// ── THEME ─────────────────────────────────────────────────────────
+// ── THEMES ────────────────────────────────────────────────────────
 const THEMES = {
-  midnight: {
-    '--bg':'#0d0d14','--surface':'#13131f','--card':'#1a1a2e',
-    '--border':'#232338','--border-light':'#2e2e48',
-    '--primary':'#8b5cf6','--primary-h':'#7c3aed','--primary-s':'rgba(139,92,246,0.14)',
-    '--reels':'#c026d3','--reels-s':'rgba(192,38,211,0.14)',
-    '--shorts':'#ef4444','--shorts-s':'rgba(239,68,68,0.13)',
-    '--both':'#f59e0b','--both-s':'rgba(245,158,11,0.14)',
-    '--text':'#e2e2f0','--dim':'#9292b0','--muted':'#5c5c7a','--success':'#10b981'
-  },
-  nord: {
-    '--bg':'#242933','--surface':'#2e3440','--card':'#353d4a',
-    '--border':'#3b4252','--border-light':'#4c566a',
-    '--primary':'#5e81ac','--primary-h':'#4c7099','--primary-s':'rgba(94,129,172,0.18)',
-    '--reels':'#88c0d0','--reels-s':'rgba(136,192,208,0.18)',
-    '--shorts':'#bf616a','--shorts-s':'rgba(191,97,106,0.18)',
-    '--both':'#a3be8c','--both-s':'rgba(163,190,140,0.18)',
-    '--text':'#eceff4','--dim':'#9aabb8','--muted':'#4c566a','--success':'#a3be8c'
-  },
-  sakura: {
-    '--bg':'#16101a','--surface':'#1e1224','--card':'#261630',
-    '--border':'#2e1a36','--border-light':'#3d2248',
-    '--primary':'#e879a0','--primary-h':'#d4608a','--primary-s':'rgba(232,121,160,0.18)',
-    '--reels':'#f9a8c9','--reels-s':'rgba(249,168,201,0.18)',
-    '--shorts':'#c084fc','--shorts-s':'rgba(192,132,252,0.18)',
-    '--both':'#fb923c','--both-s':'rgba(251,146,60,0.18)',
-    '--text':'#f5dde8','--dim':'#9a6880','--muted':'#5a3a50','--success':'#86efac'
-  },
-  slate: {
-    '--bg':'#0e1117','--surface':'#161b22','--card':'#1c2128',
-    '--border':'#21262d','--border-light':'#30363d',
-    '--primary':'#d97706','--primary-h':'#b45309','--primary-s':'rgba(217,119,6,0.18)',
-    '--reels':'#fbbf24','--reels-s':'rgba(251,191,36,0.18)',
-    '--shorts':'#f87171','--shorts-s':'rgba(248,113,113,0.18)',
-    '--both':'#34d399','--both-s':'rgba(52,211,153,0.18)',
-    '--text':'#e6edf3','--dim':'#8b949e','--muted':'#484f58','--success':'#3fb950'
-  }
+  midnight: { '--bg':'#0d0d14','--surface':'#13131f','--card':'#1a1a2e','--border':'#232338','--border-light':'#2e2e48','--primary':'#8b5cf6','--primary-h':'#7c3aed','--primary-s':'rgba(139,92,246,0.14)','--tiktok':'#ff0050','--tiktok-s':'rgba(255,0,80,0.13)','--reels':'#c026d3','--reels-s':'rgba(192,38,211,0.14)','--shorts':'#ef4444','--shorts-s':'rgba(239,68,68,0.13)','--both':'#f59e0b','--both-s':'rgba(245,158,11,0.14)','--text':'#e2e2f0','--dim':'#9292b0','--muted':'#5c5c7a','--success':'#10b981' },
+  nord:     { '--bg':'#242933','--surface':'#2e3440','--card':'#353d4a','--border':'#3b4252','--border-light':'#4c566a','--primary':'#5e81ac','--primary-h':'#4c7099','--primary-s':'rgba(94,129,172,0.18)','--tiktok':'#ff6b8a','--tiktok-s':'rgba(255,107,138,0.18)','--reels':'#88c0d0','--reels-s':'rgba(136,192,208,0.18)','--shorts':'#bf616a','--shorts-s':'rgba(191,97,106,0.18)','--both':'#a3be8c','--both-s':'rgba(163,190,140,0.18)','--text':'#eceff4','--dim':'#9aabb8','--muted':'#4c566a','--success':'#a3be8c' },
+  sakura:   { '--bg':'#16101a','--surface':'#1e1224','--card':'#261630','--border':'#2e1a36','--border-light':'#3d2248','--primary':'#e879a0','--primary-h':'#d4608a','--primary-s':'rgba(232,121,160,0.18)','--tiktok':'#ff0050','--tiktok-s':'rgba(255,0,80,0.15)','--reels':'#f9a8c9','--reels-s':'rgba(249,168,201,0.18)','--shorts':'#c084fc','--shorts-s':'rgba(192,132,252,0.18)','--both':'#fb923c','--both-s':'rgba(251,146,60,0.18)','--text':'#f5dde8','--dim':'#9a6880','--muted':'#5a3a50','--success':'#86efac' },
+  slate:    { '--bg':'#0e1117','--surface':'#161b22','--card':'#1c2128','--border':'#21262d','--border-light':'#30363d','--primary':'#d97706','--primary-h':'#b45309','--primary-s':'rgba(217,119,6,0.18)','--tiktok':'#ff0050','--tiktok-s':'rgba(255,0,80,0.13)','--reels':'#fbbf24','--reels-s':'rgba(251,191,36,0.18)','--shorts':'#f87171','--shorts-s':'rgba(248,113,113,0.18)','--both':'#34d399','--both-s':'rgba(52,211,153,0.18)','--text':'#e6edf3','--dim':'#8b949e','--muted':'#484f58','--success':'#3fb950' }
 }
 
 function applyTheme(name, save = true) {
   const vars = THEMES[name] || THEMES.midnight
-  const root = document.documentElement
-  for (const [k, v] of Object.entries(vars)) root.style.setProperty(k, v)
+  for (const [k,v] of Object.entries(vars)) document.documentElement.style.setProperty(k, v)
   S.theme = name
-  document.querySelectorAll('.theme-opt').forEach(el => {
-    el.classList.toggle('active', el.dataset.theme === name)
-  })
+  document.querySelectorAll('.theme-opt').forEach(el => el.classList.toggle('active', el.dataset.theme === name))
   if (save && window.op) window.op.store.set('theme', name)
 }
 
@@ -686,12 +623,20 @@ async function init() {
     const gc = await window.op.store.get('googleClientId'); if (gc) document.getElementById('s-gcid').value = gc
     const gt = await window.op.store.get('googleToken'); if (gt) setGCBadge(true)
     const savedTheme = await window.op.store.get('theme')
-    const igU = await window.op.store.get('igUsername')
-    const igT = await window.op.store.get('igToken')
+    // Instagram
+    const igU = await window.op.store.get('igUsername'), igT = await window.op.store.get('igToken')
     if (igU) { document.getElementById('ig-username').value = igU; setIgBadge(true); document.getElementById('igSavedLabel').textContent = `Connected as ${igU}` }
     if (igT) document.getElementById('ig-token').value = igT
-    if (savedTheme) applyTheme(savedTheme, false)
-    else applyTheme('midnight', false)
+    // YouTube
+    const ytC = await window.op.store.get('ytChannel'), ytT = await window.op.store.get('ytToken')
+    if (ytC) { document.getElementById('yt-channel').value = ytC; setYtBadge(true); document.getElementById('ytSavedLabel').textContent = `Connected as ${ytC}` }
+    if (ytT) document.getElementById('yt-token').value = ytT
+    // TikTok
+    const ttU = await window.op.store.get('ttUsername'), ttT = await window.op.store.get('ttToken')
+    if (ttU) { document.getElementById('tt-username').value = ttU; setTtBadge(true); document.getElementById('ttSavedLabel').textContent = `Connected as ${ttU}` }
+    if (ttT) document.getElementById('tt-token').value = ttT
+
+    if (savedTheme) applyTheme(savedTheme, false); else applyTheme('midnight', false)
     const skipped = await window.op.store.get('wizardSkipped')
     await checkOllama()
     if (!S.ollamaRunning && !skipped) showWizard()
@@ -699,129 +644,60 @@ async function init() {
   renderCalendar()
 }
 
-// ── OLLAMA CHECK ──────────────────────────────────────────────────
+// ── OLLAMA ────────────────────────────────────────────────────────
 async function checkOllama() {
   if (!window.op) return
   const res = await window.op.ollama.check()
-  S.ollamaRunning = res.running
-  S.ollamaModels  = res.models || []
-  updateOllamaUI()
+  S.ollamaRunning = res.running; S.ollamaModels = res.models || []; updateOllamaUI()
 }
-
 function updateOllamaUI() {
-  const dot   = document.getElementById('ollamaDot')
-  const badge = document.getElementById('ollamaBadge')
-  const lbl   = document.getElementById('ollamaModelLabel')
-  const list  = document.getElementById('modelList')
+  const dot = document.getElementById('ollamaDot'), badge = document.getElementById('ollamaBadge')
+  const lbl = document.getElementById('ollamaModelLabel'), list = document.getElementById('modelList')
   if (S.ollamaRunning) {
-    dot.className   = 'ollama-dot on'
-    badge.textContent = '● Ollama Running'
-    badge.className   = 'badge on'
-    const has3 = S.ollamaModels.some(m => m.name?.includes('llama3') || m.name?.includes('llama3'))
-    lbl.textContent = has3 ? 'Llama 3 ready ✓' : 'Llama 3 not yet downloaded'
-    list.innerHTML  = S.ollamaModels.length
-      ? S.ollamaModels.map(m => `<div class="model-row"><div><div class="model-name">${m.name}</div><div class="model-meta">${m.size ? (m.size/1e9).toFixed(1)+'GB' : ''}</div></div><span class="badge on" style="font-size:10px">Installed</span></div>`).join('')
-      : '<div style="font-size:12px;color:var(--muted);padding:8px 0">No models downloaded yet. Pull Llama 3 to get started.</div>'
+    dot.className = 'ollama-dot on'; badge.textContent = '● Ollama Running'; badge.className = 'badge on'
+    lbl.textContent = S.ollamaModels.some(m => m.name?.includes('llama3')) ? 'Llama 3 ready ✓' : 'Llama 3 not yet downloaded'
+    list.innerHTML = S.ollamaModels.length ? S.ollamaModels.map(m => `<div class="model-row"><div><div class="model-name">${m.name}</div><div class="model-meta">${m.size?(m.size/1e9).toFixed(1)+'GB':''}</div></div><span class="badge on" style="font-size:10px">Installed</span></div>`).join('') : '<div style="font-size:12px;color:var(--muted);padding:8px 0">No models downloaded yet.</div>'
   } else {
-    dot.className     = 'ollama-dot off'
-    badge.textContent = '● Ollama Offline'
-    badge.className   = 'badge off'
-    lbl.textContent   = ''
-    list.innerHTML    = '<div style="font-size:12px;color:var(--muted);padding:8px 0">Ollama is not running. Download and start Ollama to enable AI generation.</div>'
+    dot.className = 'ollama-dot off'; badge.textContent = '● Ollama Offline'; badge.className = 'badge off'
+    lbl.textContent = ''; list.innerHTML = '<div style="font-size:12px;color:var(--muted);padding:8px 0">Ollama is not running.</div>'
   }
 }
-
-// ── PULL MODEL ────────────────────────────────────────────────────
 async function pullLlama3() {
-  if (!window.op) return
-  if (!S.ollamaRunning) { toast('Start Ollama first.','err'); return }
-  if (S.pulling) return
+  if (!window.op||!S.ollamaRunning||S.pulling) return
   S.pulling = true
-  const progWrap = document.getElementById('set-prog-wrap')
-  const progFill = document.getElementById('set-prog')
-  const status   = document.getElementById('set-pull-status')
-  progWrap.style.display = 'block'
-  status.textContent = 'Starting download...'
+  const pw = document.getElementById('set-prog-wrap'), pf = document.getElementById('set-prog'), st = document.getElementById('set-pull-status')
+  pw.style.display = 'block'; st.textContent = 'Starting download...'
   window.op.ollama.onPullProgress(d => {
-    if (d.total && d.completed) {
-      const pct = Math.round((d.completed / d.total) * 100)
-      progFill.style.width = pct + '%'
-      status.textContent   = `${d.status} — ${pct}%`
-    } else if (d.status) {
-      status.textContent = d.status
-    }
-    if (d.status === 'success') {
-      S.pulling = false
-      progFill.style.width = '100%'
-      status.textContent   = 'Llama 3 downloaded successfully!'
-      window.op.ollama.removePullListeners()
-      checkOllama()
-      toast('Llama 3 is ready!','ok')
-    }
+    if (d.total&&d.completed){const pct=Math.round((d.completed/d.total)*100);pf.style.width=pct+'%';st.textContent=`${d.status} — ${pct}%`}
+    else if(d.status) st.textContent=d.status
+    if(d.status==='success'){S.pulling=false;pf.style.width='100%';st.textContent='Llama 3 downloaded!';window.op.ollama.removePullListeners();checkOllama();toast('Llama 3 is ready!','ok')}
   })
-  try {
-    await window.op.ollama.pull('llama3')
-  } catch(e) {
-    S.pulling = false
-    status.textContent = 'Download failed. Is Ollama running?'
-    toast('Pull failed — check Ollama is running.','err')
-  }
+  try { await window.op.ollama.pull('llama3') }
+  catch(e){S.pulling=false;st.textContent='Download failed.';toast('Pull failed.','err')}
 }
 
-// ── SETUP WIZARD ──────────────────────────────────────────────────
+// ── WIZARD ────────────────────────────────────────────────────────
 function showWizard() { document.getElementById('wizardOverlay').style.display = 'flex' }
-function dismissWizard() {
-  document.getElementById('wizardOverlay').style.display = 'none'
-  window.op?.store.set('wizardSkipped', true)
-}
-
+function dismissWizard() { document.getElementById('wizardOverlay').style.display = 'none'; window.op?.store.set('wizardSkipped', true) }
 async function wizardNext() {
   const btn = document.getElementById('wizBtn')
-  if (S.wizardStep === 1) {
-    btn.disabled = true; btn.textContent = 'Checking...'
-    await checkOllama()
-    btn.disabled = false
-    if (S.ollamaRunning) {
-      markWizStep(1)
-      S.wizardStep = 2
-      btn.textContent = 'Download Llama 3'
-    } else {
-      btn.textContent = 'Check Again'
-      toast('Ollama not detected. Install it and make sure it is running.','warn')
-    }
-  } else if (S.wizardStep === 2) {
-    const pw = document.getElementById('wiz-prog-wrap')
-    const pf = document.getElementById('wiz-prog')
-    const ps = document.getElementById('wiz-pull-status')
-    pw.style.display = 'block'
-    btn.disabled = true; btn.textContent = 'Downloading...'
-    window.op.ollama.onPullProgress(d => {
-      if (d.total && d.completed) {
-        const pct = Math.round((d.completed / d.total) * 100)
-        pf.style.width = pct + '%'; ps.textContent = `${d.status} — ${pct}%`
-      } else if (d.status) { ps.textContent = d.status }
-      if (d.status === 'success') {
-        markWizStep(2); markWizStep(3)
-        S.wizardStep = 3
-        btn.textContent = 'Start Planning!'
-        btn.disabled = false
-        window.op.ollama.removePullListeners()
-        checkOllama()
-      }
+  if (S.wizardStep===1) {
+    btn.disabled=true;btn.textContent='Checking...';await checkOllama();btn.disabled=false
+    if(S.ollamaRunning){markWizStep(1);S.wizardStep=2;btn.textContent='Download Llama 3'}
+    else{btn.textContent='Check Again';toast('Ollama not detected.','warn')}
+  } else if (S.wizardStep===2) {
+    const pw=document.getElementById('wiz-prog-wrap'),pf=document.getElementById('wiz-prog'),ps=document.getElementById('wiz-pull-status')
+    pw.style.display='block';btn.disabled=true;btn.textContent='Downloading...'
+    window.op.ollama.onPullProgress(d=>{
+      if(d.total&&d.completed){const pct=Math.round((d.completed/d.total)*100);pf.style.width=pct+'%';ps.textContent=`${d.status} — ${pct}%`}
+      else if(d.status)ps.textContent=d.status
+      if(d.status==='success'){markWizStep(2);markWizStep(3);S.wizardStep=3;btn.textContent='Start Planning!';btn.disabled=false;window.op.ollama.removePullListeners();checkOllama()}
     })
-    try { await window.op.ollama.pull('llama3') }
-    catch(e) { btn.disabled=false; btn.textContent='Retry Download'; toast('Download failed.','err') }
-  } else if (S.wizardStep === 3) {
-    dismissWizard()
-  }
+    try{await window.op.ollama.pull('llama3')}catch(e){btn.disabled=false;btn.textContent='Retry Download';toast('Download failed.','err')}
+  } else if (S.wizardStep===3) { dismissWizard() }
 }
-
-function markWizStep(n) {
-  const el = document.getElementById(`wiz-n${n}`)
-  el.textContent = '✓'; el.className = 'step-num done'
-}
-
-function openOllama() { window.op?.shell.open('https://ollama.com/download') }
+function markWizStep(n){const el=document.getElementById(`wiz-n${n}`);el.textContent='✓';el.className='step-num done'}
+function openOllama(){window.op?.shell.open('https://ollama.com/download')}
 
 // ── VIEWS ─────────────────────────────────────────────────────────
 function switchView(v) {
@@ -830,50 +706,43 @@ function switchView(v) {
   document.querySelectorAll('.nav').forEach(el => el.classList.remove('active'))
   document.getElementById(`view-${v}`).classList.add('active')
   document.getElementById(`nav-${v}`)?.classList.add('active')
-  if (v === 'reels') renderIgPosts()
+  if (v==='reels')  renderIgPosts()
+  if (v==='shorts') renderYtPosts()
+  if (v==='tiktok') renderTtPosts()
 }
 
 // ── CALENDAR ──────────────────────────────────────────────────────
 function renderCalendar() {
-  const { month: m, year: y } = S
+  const {month:m,year:y} = S
   document.getElementById('calLabel').textContent = `${MONTHS[m]} ${y}`
-  const first = new Date(y, m, 1).getDay(), days = new Date(y, m+1, 0).getDate()
-  const prevD = new Date(y, m, 0).getDate(), now = new Date()
-  let h = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d => `<div class="day-hd">${d}</div>`).join('')
-  for (let i = first-1; i >= 0; i--) h += `<div class="day other"><div class="dn">${prevD-i}</div></div>`
-  for (let d = 1; d <= days; d++) {
-    const ds = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`
-    const tod = now.getDate()===d && now.getMonth()===m && now.getFullYear()===y
-    const dp  = S.posts.filter(p => p.date === ds)
-    const pills = dp.slice(0,3).map(p => `<div class="pill ${p.platform}" onclick="event.stopPropagation();showPost('${p.id}')">${p.title}</div>`).join('') +
-      (dp.length>3 ? `<div style="font-size:10px;color:var(--muted);padding:1px 4px">+${dp.length-3}</div>` : '')
-    h += `<div class="day${tod?' today':''}" onclick="quickSched('${ds}')"><div class="dn">${d}</div>${pills}</div>`
+  const first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate(),prevD=new Date(y,m,0).getDate(),now=new Date()
+  let h=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(d=>`<div class="day-hd">${d}</div>`).join('')
+  for(let i=first-1;i>=0;i--)h+=`<div class="day other"><div class="dn">${prevD-i}</div></div>`
+  for(let d=1;d<=days;d++){
+    const ds=`${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`
+    const tod=now.getDate()===d&&now.getMonth()===m&&now.getFullYear()===y
+    const dp=S.posts.filter(p=>p.date===ds)
+    const pills=dp.slice(0,3).map(p=>`<div class="pill ${p.platform}" onclick="event.stopPropagation();showPost('${p.id}')">${p.title}</div>`).join('')+(dp.length>3?`<div style="font-size:10px;color:var(--muted);padding:1px 4px">+${dp.length-3}</div>`:'')
+    h+=`<div class="day${tod?' today':''}" onclick="quickSched('${ds}')"><div class="dn">${d}</div>${pills}</div>`
   }
-  const rem = (7 - ((first+days)%7)) % 7
-  for (let i = 1; i <= rem; i++) h += `<div class="day other"><div class="dn">${i}</div></div>`
-  document.getElementById('calGrid').innerHTML = h
+  const rem=(7-((first+days)%7))%7
+  for(let i=1;i<=rem;i++)h+=`<div class="day other"><div class="dn">${i}</div></div>`
+  document.getElementById('calGrid').innerHTML=h
+}
+function changeMonth(d){S.month+=d;if(S.month>11){S.month=0;S.year++}if(S.month<0){S.month=11;S.year--}renderCalendar()}
+function goToday(){const n=new Date();S.month=n.getMonth();S.year=n.getFullYear();renderCalendar()}
+
+// ── PLATFORM TOGGLE ───────────────────────────────────────────────
+function setPlatform(p){
+  S.platform=p
+  ;['tiktok','reels','shorts','both'].forEach(x=>document.getElementById(`pt-${x}`).classList.toggle('active',x===p))
 }
 
-function changeMonth(d) {
-  S.month += d
-  if (S.month > 11) { S.month = 0; S.year++ }
-  if (S.month < 0)  { S.month = 11; S.year-- }
-  renderCalendar()
-}
-function goToday() { const n = new Date(); S.month = n.getMonth(); S.year = n.getFullYear(); renderCalendar() }
-
-// ── PLATFORM ──────────────────────────────────────────────────────
-function setPlatform(p) {
-  S.platform = p
-  ;['reels','shorts','both'].forEach(x => document.getElementById(`pt-${x}`).classList.toggle('active', x===p))
-}
-
-// ── AI GENERATION (Ollama) ────────────────────────────────────────
-const SYS = `You are OpenPlanner AI, an expert short-form video content strategist inside OpenPlanner — a free, open-source, local social media planner. Generate optimized content for YouTube Shorts and Instagram Reels.
-
-INSTAGRAM REELS: 30–60s optimal, hook in first 1–3s, 5–10 niche hashtags, strong CTA (save/share/comment).
+// ── AI GENERATION ─────────────────────────────────────────────────
+const SYS=`You are OpenPlanner AI, an expert short-form video content strategist. Generate optimized content for TikTok, YouTube Shorts, and Instagram Reels.
+TIKTOK: 21–34s sweet spot, trending audio, jump cuts, 1–3x daily posting.
+INSTAGRAM REELS: 30–60s optimal, hook in first 1–3s, 5–10 niche hashtags, strong CTA.
 YOUTUBE SHORTS: Under 60s strict, keyword-first title, always include #Shorts, loop-friendly ending.
-
 Respond ONLY using this exact format:
 ---
 🎬 PLATFORM: [platform]
@@ -888,248 +757,190 @@ Respond ONLY using this exact format:
 ---`
 
 async function generate() {
-  const btn  = document.getElementById('genBtn')
-  const idea = document.getElementById('f-input').value.trim()
-  if (!idea) { toast('Please enter a content idea or topic.','err'); return }
-  if (!window.op) {
-    renderStreamPreview(`[Run as desktop app with Ollama to generate real content for: "${idea}"]`)
-    return
-  }
-  if (!S.ollamaRunning) {
-    toast('Ollama is not running. Check Settings → AI Engine.','err')
-    return
-  }
-
-  const plabels = { reels:'Instagram Reels', shorts:'YouTube Shorts', both:'Instagram Reels and YouTube Shorts' }
-  const prompt  = `Create short-form video content for ${plabels[S.platform]}.
+  const btn=document.getElementById('genBtn'),idea=document.getElementById('f-input').value.trim()
+  if(!idea){toast('Please enter a content idea or topic.','err');return}
+  if(!window.op){renderStreamPreview(`[Run as desktop app with Ollama to generate real content for: "${idea}"]`);return}
+  if(!S.ollamaRunning){toast('Ollama is not running. Check Settings → AI Engine.','err');return}
+  const plabels={tiktok:'TikTok',reels:'Instagram Reels',shorts:'YouTube Shorts',both:'TikTok, Instagram Reels, and YouTube Shorts'}
+  const prompt=`Create short-form video content for ${plabels[S.platform]}.
 Brand: ${document.getElementById('f-brand').value||'My Brand'}
 Niche: ${document.getElementById('f-niche').value||'general'}
 Audience: ${document.getElementById('f-audience').value||'general audience'}
 Tone: ${document.getElementById('f-tone').value}
 Goal: ${document.getElementById('f-goal').value}
 Content Input: ${idea}`
-
-  btn.disabled = true; btn.innerHTML = '<div class="spin"></div> Generating...'
-  S.generated = ''
-
-  // Streaming output
-  document.getElementById('outputArea').innerHTML =
-    `<div class="out-block"><div class="out-lbl">⚡ Generating</div><div class="out-txt stream-txt" id="streamOut"></div></div>`
-
+  btn.disabled=true;btn.innerHTML='<div class="spin"></div> Generating...';S.generated=''
+  document.getElementById('outputArea').innerHTML=`<div class="out-block"><div class="out-lbl">⚡ Generating</div><div class="out-txt stream-txt" id="streamOut"></div></div>`
   window.op.ollama.removeStreamListeners()
-  window.op.ollama.onStream(token => {
-    S.generated += token
-    const el = document.getElementById('streamOut')
-    if (el) { el.textContent = S.generated; el.parentElement.parentElement.scrollTop = el.parentElement.parentElement.scrollHeight }
+  window.op.ollama.onStream(token=>{
+    S.generated+=token
+    const el=document.getElementById('streamOut')
+    if(el){el.textContent=S.generated;el.parentElement.parentElement.scrollTop=el.parentElement.parentElement.scrollHeight}
   })
-
-  try {
-    await window.op.ollama.generate({ model: S.activeModel, system: SYS, prompt })
-    window.op.ollama.removeStreamListeners()
-    renderOutput(S.generated)
-    toast('Content generated!','ok')
-  } catch(e) {
+  try{
+    await window.op.ollama.generate({model:S.activeModel,system:SYS,prompt})
+    window.op.ollama.removeStreamListeners();renderOutput(S.generated);toast('Content generated!','ok')
+  }catch(e){
     toast('Generation failed — is Ollama running?','err')
-    document.getElementById('outputArea').innerHTML =
-      `<div class="empty-st"><div class="empty-ic">⚠️</div><div style="font-size:13px">Generation failed. Check Ollama is running in Settings.</div></div>`
-  } finally {
-    btn.disabled = false; btn.innerHTML = '<span>✦</span> Generate with Llama 3'
-  }
+    document.getElementById('outputArea').innerHTML=`<div class="empty-st"><div class="empty-ic">⚠️</div><div style="font-size:13px">Generation failed. Check Ollama is running in Settings.</div></div>`
+  }finally{btn.disabled=false;btn.innerHTML='<span>✦</span> Generate with Llama 3'}
 }
-
-function renderStreamPreview(txt) {
-  document.getElementById('outputArea').innerHTML =
-    `<div class="out-block"><div class="out-txt">${txt}</div></div>`
-}
-
-function renderOutput(text) {
-  const map = { 'PLATFORM':'🎬','SUGGESTED TIME':'🗓','CALENDAR TITLE':'📌','HOOK':'🪝','SCRIPT':'🎙','TITLE':'📝','HASHTAGS':'#️⃣','NOTES':'📅','PRO TIP':'💡' }
-  const parsed = {}; let cur = null
-  for (const line of text.split('\n')) {
-    const t = line.trim(); if (t==='---') continue
-    let hit = false
-    for (const [k,e] of Object.entries(map)) {
-      if (t.startsWith(`${e} ${k}:`)) { cur = k; parsed[k] = t.replace(`${e} ${k}:`,'').trim(); hit=true; break }
-    }
-    if (!hit && cur && t) parsed[cur] = (parsed[cur]||'') + '\n' + t
+function renderStreamPreview(txt){document.getElementById('outputArea').innerHTML=`<div class="out-block"><div class="out-txt">${txt}</div></div>`}
+function renderOutput(text){
+  const map={'PLATFORM':'🎬','SUGGESTED TIME':'🗓','CALENDAR TITLE':'📌','HOOK':'🪝','SCRIPT':'🎙','TITLE':'📝','HASHTAGS':'#️⃣','NOTES':'📅','PRO TIP':'💡'}
+  const parsed={};let cur=null
+  for(const line of text.split('\n')){
+    const t=line.trim();if(t==='---')continue
+    let hit=false
+    for(const [k,e] of Object.entries(map)){if(t.startsWith(`${e} ${k}:`)){cur=k;parsed[k]=t.replace(`${e} ${k}:`,'').trim();hit=true;break}}
+    if(!hit&&cur&&t)parsed[cur]=(parsed[cur]||'')+'\n'+t
   }
-  let h = ''
-  for (const [k,v] of Object.entries(parsed)) {
-    if (!v?.trim()) continue
-    h += `<div class="out-block"><div class="out-lbl">${map[k]||''} ${k}</div><div class="out-txt">${v.trim()}</div></div>`
-  }
-  if (!h) h = `<div class="out-block"><div class="out-txt">${text}</div></div>`
-  h += `<button class="sched-btn" onclick="openSchedModal()">📅 Schedule This Post</button>`
-  document.getElementById('outputArea').innerHTML = h
+  let h=''
+  for(const [k,v] of Object.entries(parsed)){if(!v?.trim())continue;h+=`<div class="out-block"><div class="out-lbl">${map[k]||''} ${k}</div><div class="out-txt">${v.trim()}</div></div>`}
+  if(!h)h=`<div class="out-block"><div class="out-txt">${text}</div></div>`
+  h+=`<button class="sched-btn" onclick="openSchedModal()">📅 Schedule This Post</button>`
+  document.getElementById('outputArea').innerHTML=h
 }
 
 // ── SCHEDULING ────────────────────────────────────────────────────
-function quickSched(dateStr) {
-  document.getElementById('m-date').value = dateStr
-  document.getElementById('m-title').value = ''
-  document.getElementById('m-notes').value = ''
-  document.getElementById('m-platform').value = 'reels'
+function quickSched(dateStr){
+  document.getElementById('m-date').value=dateStr;document.getElementById('m-title').value=''
+  document.getElementById('m-notes').value='';document.getElementById('m-platform').value='tiktok'
   openModal('schedModal')
 }
-function openSchedModal() {
-  if (S.generated) {
-    const m = S.generated.match(/CALENDAR TITLE:\s*(.+)/i)
-    if (m) document.getElementById('m-title').value = m[1].trim()
-  }
-  document.getElementById('m-platform').value = S.platform
-  const d = new Date(); d.setDate(d.getDate()+2)
-  document.getElementById('m-date').value = d.toISOString().split('T')[0]
+function openSchedModal(){
+  if(S.generated){const m=S.generated.match(/CALENDAR TITLE:\s*(.+)/i);if(m)document.getElementById('m-title').value=m[1].trim()}
+  document.getElementById('m-platform').value=S.platform
+  const d=new Date();d.setDate(d.getDate()+2);document.getElementById('m-date').value=d.toISOString().split('T')[0]
   openModal('schedModal')
 }
-async function confirmSchedule() {
-  const title = document.getElementById('m-title').value.trim()
-  const date  = document.getElementById('m-date').value
-  if (!title||!date) { toast('Fill in title and date.','err'); return }
-  const post = {
-    id: Date.now().toString(), title, date,
-    time: document.getElementById('m-time').value,
-    platform: document.getElementById('m-platform').value,
-    notes: document.getElementById('m-notes').value.trim(),
-    content: S.generated||'', createdAt: new Date().toISOString()
-  }
+async function confirmSchedule(){
+  const title=document.getElementById('m-title').value.trim(),date=document.getElementById('m-date').value
+  if(!title||!date){toast('Fill in title and date.','err');return}
+  const post={id:Date.now().toString(),title,date,time:document.getElementById('m-time').value,platform:document.getElementById('m-platform').value,notes:document.getElementById('m-notes').value.trim(),content:S.generated||'',createdAt:new Date().toISOString()}
   S.posts.push(post)
-  if (window.op) { await window.op.store.set('posts', S.posts); await pushGCal(post) }
-  closeModal('schedModal'); renderCalendar()
-  toast(`Scheduled for ${date} at ${post.time}!`,'ok')
-  setTimeout(() => switchView('calendar'), 700)
+  if(window.op){await window.op.store.set('posts',S.posts);await pushGCal(post)}
+  closeModal('schedModal');renderCalendar();toast(`Scheduled for ${date} at ${post.time}!`,'ok')
+  setTimeout(()=>switchView('calendar'),700)
 }
-
-async function pushGCal(post) {
-  if (!window.op) return
-  const token = await window.op.store.get('googleToken'); if (!token) return
-  const labs  = { reels:'Instagram Reels', shorts:'YouTube Shorts', both:'Reels + Shorts' }
-  const cols  = { reels:'3', shorts:'11', both:'5' }
-  const start = `${post.date}T${post.time}:00`
-  const end   = new Date(`${post.date}T${post.time}:00`); end.setMinutes(end.getMinutes()+30)
-  try {
-    const r = await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events', {
-      method:'POST',
-      headers:{'Authorization':`Bearer ${token}`,'Content-Type':'application/json'},
-      body: JSON.stringify({
-        summary: `[${labs[post.platform]}] ${post.title}`,
-        description: post.notes || post.content?.slice(0,300) || '',
-        start:{ dateTime: start, timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone },
-        end:  { dateTime: end.toISOString().slice(0,16)+':00', timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone },
-        colorId: cols[post.platform],
-        reminders:{ useDefault:false, overrides:[{method:'popup',minutes:1440},{method:'popup',minutes:60}] }
-      })
+async function pushGCal(post){
+  if(!window.op)return
+  const token=await window.op.store.get('googleToken');if(!token)return
+  const labs={tiktok:'TikTok',reels:'Instagram Reels',shorts:'YouTube Shorts',both:'All Platforms'}
+  const cols={tiktok:'11',reels:'3',shorts:'11',both:'5'}
+  const start=`${post.date}T${post.time}:00`
+  const end=new Date(`${post.date}T${post.time}:00`);end.setMinutes(end.getMinutes()+30)
+  try{
+    const r=await fetch('https://www.googleapis.com/calendar/v3/calendars/primary/events',{
+      method:'POST',headers:{'Authorization':`Bearer ${token}`,'Content-Type':'application/json'},
+      body:JSON.stringify({summary:`[${labs[post.platform]}] ${post.title}`,description:post.notes||post.content?.slice(0,300)||'',start:{dateTime:start,timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone},end:{dateTime:end.toISOString().slice(0,16)+':00',timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone},colorId:cols[post.platform],reminders:{useDefault:false,overrides:[{method:'popup',minutes:1440},{method:'popup',minutes:60}]}})
     })
-    if (r.ok) toast('Synced to Google Calendar ✓','ok')
-  } catch(e) { console.error('GCal sync error',e) }
+    if(r.ok)toast('Synced to Google Calendar ✓','ok')
+  }catch(e){console.error('GCal sync error',e)}
 }
 
 // ── POST DETAIL ───────────────────────────────────────────────────
-function showPost(id) {
-  const p = S.posts.find(x => x.id===id); if (!p) return
-  S.selectedPost = id
-  const labs = { reels:'🎞️ Reels', shorts:'🎬 Shorts', both:'✦ Both' }
-  document.getElementById('pm-title').textContent = p.title
-  document.getElementById('pm-body').innerHTML =
-    `<div style="display:flex;gap:8px;align-items:center;margin-bottom:14px">
-      <span class="pill ${p.platform}" style="font-size:12px;padding:4px 10px">${labs[p.platform]}</span>
-      <span style="font-size:12px;color:var(--muted)">${p.date} at ${p.time}</span>
-    </div>
-    ${p.notes?`<div class="out-block"><div class="out-lbl">Notes</div><div class="out-txt">${p.notes}</div></div>`:''}
-    ${p.content?`<div class="out-block"><div class="out-lbl">Generated Content</div><div class="out-txt" style="max-height:180px;overflow:auto">${p.content}</div></div>`:''}`
+function showPost(id){
+  const p=S.posts.find(x=>x.id===id);if(!p)return
+  S.selectedPost=id
+  const labs={tiktok:'🎵 TikTok',reels:'🎞️ Reels',shorts:'🎬 Shorts',both:'✦ All'}
+  document.getElementById('pm-title').textContent=p.title
+  document.getElementById('pm-body').innerHTML=`<div style="display:flex;gap:8px;align-items:center;margin-bottom:14px"><span class="pill ${p.platform}" style="font-size:12px;padding:4px 10px">${labs[p.platform]}</span><span style="font-size:12px;color:var(--muted)">${p.date} at ${p.time}</span></div>${p.notes?`<div class="out-block"><div class="out-lbl">Notes</div><div class="out-txt">${p.notes}</div></div>`:''}${p.content?`<div class="out-block"><div class="out-lbl">Generated Content</div><div class="out-txt" style="max-height:180px;overflow:auto">${p.content}</div></div>`:''}`
   openModal('postModal')
 }
-async function deletePost() {
-  S.posts = S.posts.filter(p => p.id!==S.selectedPost)
-  if (window.op) await window.op.store.set('posts', S.posts)
-  closeModal('postModal'); renderCalendar(); toast('Post removed.','ok')
+async function deletePost(){
+  S.posts=S.posts.filter(p=>p.id!==S.selectedPost)
+  if(window.op)await window.op.store.set('posts',S.posts)
+  closeModal('postModal');renderCalendar();toast('Post removed.','ok')
+}
+
+// ── TIKTOK ────────────────────────────────────────────────────────
+async function saveTtCreds(){
+  const u=document.getElementById('tt-username').value.trim(),t=document.getElementById('tt-token').value.trim()
+  if(!u||!t){toast('Enter both username and token.','err');return}
+  if(window.op){await window.op.store.set('ttUsername',u);await window.op.store.set('ttToken',t)}
+  setTtBadge(true);document.getElementById('ttSavedLabel').textContent=`Connected as ${u}`;toast('TikTok credentials saved!','ok')
+}
+async function clearTtCreds(){
+  if(window.op){await window.op.store.delete('ttUsername');await window.op.store.delete('ttToken')}
+  document.getElementById('tt-username').value='';document.getElementById('tt-token').value=''
+  document.getElementById('ttSavedLabel').textContent='';setTtBadge(false);toast('TikTok disconnected.','ok')
+}
+function setTtBadge(on){const b=document.getElementById('ttStatusBadge');if(!b)return;b.textContent=on?'● Connected':'● Not Connected';b.className=`badge ${on?'on':'off'}`}
+function renderTtPosts(){
+  const el=document.getElementById('ttPostsList');if(!el)return
+  const posts=S.posts.filter(p=>p.platform==='tiktok'||p.platform==='both')
+  if(!posts.length){el.innerHTML=`<div class="empty-st"><div class="empty-ic">🎵</div><div style="font-size:13px">No TikToks scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a TikTok</div></div>`;return}
+  el.innerHTML=posts.sort((a,b)=>a.date.localeCompare(b.date)).map(p=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:11px;margin-bottom:8px;display:flex;align-items:center;gap:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--tiktok);flex-shrink:0"></div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.title}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${p.date} at ${p.time}</div></div><button onclick="showPost('${p.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:6px" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='none'">View</button></div>`).join('')
 }
 
 // ── INSTAGRAM ─────────────────────────────────────────────────────
-async function saveIgCreds() {
-  const u = document.getElementById('ig-username').value.trim()
-  const t = document.getElementById('ig-token').value.trim()
-  if (!u || !t) { toast('Enter both username and token.','err'); return }
-  if (window.op) {
-    await window.op.store.set('igUsername', u)
-    await window.op.store.set('igToken', t)
-  }
-  setIgBadge(true)
-  document.getElementById('igSavedLabel').textContent = `Connected as ${u}`
-  toast('Instagram credentials saved!','ok')
+async function saveIgCreds(){
+  const u=document.getElementById('ig-username').value.trim(),t=document.getElementById('ig-token').value.trim()
+  if(!u||!t){toast('Enter both username and token.','err');return}
+  if(window.op){await window.op.store.set('igUsername',u);await window.op.store.set('igToken',t)}
+  setIgBadge(true);document.getElementById('igSavedLabel').textContent=`Connected as ${u}`;toast('Instagram credentials saved!','ok')
+}
+async function clearIgCreds(){
+  if(window.op){await window.op.store.delete('igUsername');await window.op.store.delete('igToken')}
+  document.getElementById('ig-username').value='';document.getElementById('ig-token').value=''
+  document.getElementById('igSavedLabel').textContent='';setIgBadge(false);toast('Instagram disconnected.','ok')
+}
+function setIgBadge(on){const b=document.getElementById('igStatusBadge');if(!b)return;b.textContent=on?'● Connected':'● Not Connected';b.className=`badge ${on?'on':'off'}`}
+function renderIgPosts(){
+  const el=document.getElementById('igPostsList');if(!el)return
+  const posts=S.posts.filter(p=>p.platform==='reels'||p.platform==='both')
+  if(!posts.length){el.innerHTML=`<div class="empty-st"><div class="empty-ic">🎞️</div><div style="font-size:13px">No Reels scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Reel</div></div>`;return}
+  el.innerHTML=posts.sort((a,b)=>a.date.localeCompare(b.date)).map(p=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:11px;margin-bottom:8px;display:flex;align-items:center;gap:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--reels);flex-shrink:0"></div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.title}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${p.date} at ${p.time}</div></div><button onclick="showPost('${p.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:6px" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='none'">View</button></div>`).join('')
 }
 
-async function clearIgCreds() {
-  if (window.op) {
-    await window.op.store.delete('igUsername')
-    await window.op.store.delete('igToken')
-  }
-  document.getElementById('ig-username').value = ''
-  document.getElementById('ig-token').value = ''
-  document.getElementById('igSavedLabel').textContent = ''
-  setIgBadge(false)
-  toast('Instagram disconnected.','ok')
+// ── YOUTUBE ───────────────────────────────────────────────────────
+async function saveYtCreds(){
+  const c=document.getElementById('yt-channel').value.trim(),t=document.getElementById('yt-token').value.trim()
+  if(!c||!t){toast('Enter both channel name and token.','err');return}
+  if(window.op){await window.op.store.set('ytChannel',c);await window.op.store.set('ytToken',t)}
+  setYtBadge(true);document.getElementById('ytSavedLabel').textContent=`Connected as ${c}`;toast('YouTube credentials saved!','ok')
+}
+async function clearYtCreds(){
+  if(window.op){await window.op.store.delete('ytChannel');await window.op.store.delete('ytToken')}
+  document.getElementById('yt-channel').value='';document.getElementById('yt-token').value=''
+  document.getElementById('ytSavedLabel').textContent='';setYtBadge(false);toast('YouTube disconnected.','ok')
+}
+function setYtBadge(on){const b=document.getElementById('ytStatusBadge');if(!b)return;b.textContent=on?'● Connected':'● Not Connected';b.className=`badge ${on?'on':'off'}`}
+function renderYtPosts(){
+  const el=document.getElementById('ytPostsList');if(!el)return
+  const posts=S.posts.filter(p=>p.platform==='shorts'||p.platform==='both')
+  if(!posts.length){el.innerHTML=`<div class="empty-st"><div class="empty-ic">🎬</div><div style="font-size:13px">No Shorts scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Short</div></div>`;return}
+  el.innerHTML=posts.sort((a,b)=>a.date.localeCompare(b.date)).map(p=>`<div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:11px;margin-bottom:8px;display:flex;align-items:center;gap:10px"><div style="width:8px;height:8px;border-radius:50%;background:var(--shorts);flex-shrink:0"></div><div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.title}</div><div style="font-size:11px;color:var(--muted);margin-top:2px">${p.date} at ${p.time}</div></div><button onclick="showPost('${p.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:6px" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='none'">View</button></div>`).join('')
 }
 
-function setIgBadge(on) {
-  const b = document.getElementById('igStatusBadge')
-  if (!b) return
-  b.textContent = on ? '● Connected' : '● Not Connected'
-  b.className = `badge ${on ? 'on' : 'off'}`
-}
-
-function renderIgPosts() {
-  const el = document.getElementById('igPostsList'); if (!el) return
-  const posts = S.posts.filter(p => p.platform === 'reels' || p.platform === 'both')
-  if (!posts.length) {
-    el.innerHTML = `<div class="empty-st"><div class="empty-ic">🎞️</div><div style="font-size:13px">No Reels scheduled yet</div><div style="font-size:12px;color:var(--muted);margin-top:4px">Use the AI Composer to create and schedule a Reel</div></div>`
-    return
-  }
-  el.innerHTML = posts.sort((a,b) => a.date.localeCompare(b.date)).map(p => `
-    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rs);padding:11px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
-      <div style="width:8px;height:8px;border-radius:50%;background:var(--reels);flex-shrink:0"></div>
-      <div style="flex:1;min-width:0">
-        <div style="font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${p.title}</div>
-        <div style="font-size:11px;color:var(--muted);margin-top:2px">${p.date} at ${p.time}</div>
-      </div>
-      <button onclick="showPost('${p.id}')" style="background:none;border:none;color:var(--dim);cursor:pointer;font-size:12px;padding:4px 8px;border-radius:6px;transition:all var(--ease)" onmouseover="this.style.background='var(--card)'" onmouseout="this.style.background='none'">View</button>
-    </div>`).join('')
-}
-
-
-async function saveGoogleCreds() {
-  const id = document.getElementById('s-gcid').value.trim(), sec = document.getElementById('s-gcsecret').value.trim()
-  if (!id||!sec) { toast('Enter both credentials.','err'); return }
-  if (window.op) { await window.op.store.set('googleClientId', id); await window.op.store.set('googleClientSecret', sec) }
+// ── GOOGLE CALENDAR ───────────────────────────────────────────────
+async function saveGoogleCreds(){
+  const id=document.getElementById('s-gcid').value.trim(),sec=document.getElementById('s-gcsecret').value.trim()
+  if(!id||!sec){toast('Enter both credentials.','err');return}
+  if(window.op){await window.op.store.set('googleClientId',id);await window.op.store.set('googleClientSecret',sec)}
   toast('Google credentials saved!','ok')
 }
-async function connectGoogle() {
-  if (!window.op) { toast('Run as desktop app to connect Google Calendar.','err'); return }
-  const url = await window.op.google.authUrl()
-  if (!url) { toast('Save Google credentials first.','err'); return }
-  await window.op.google.openBrowser(url)
-  document.getElementById('gcCodeArea').style.display = 'block'
+async function connectGoogle(){
+  if(!window.op){toast('Run as desktop app to connect Google Calendar.','err');return}
+  const url=await window.op.google.authUrl();if(!url){toast('Save Google credentials first.','err');return}
+  await window.op.google.openBrowser(url);document.getElementById('gcCodeArea').style.display='block'
   toast('Complete sign-in in your browser, then paste the code.','ok')
 }
-async function exchangeCode() {
-  const code = document.getElementById('s-gccode').value.trim()
-  if (!code) { toast('Paste the authorization code first.','err'); return }
-  const res = await window.op.google.exchangeCode(code)
-  if (res?.access_token) { setGCBadge(true); document.getElementById('gcCodeArea').style.display = 'none'; toast('Google Calendar connected!','ok') }
-  else { toast('Code exchange failed. Try again.','err') }
+async function exchangeCode(){
+  const code=document.getElementById('s-gccode').value.trim();if(!code){toast('Paste the authorization code first.','err');return}
+  const res=await window.op.google.exchangeCode(code)
+  if(res?.access_token){setGCBadge(true);document.getElementById('gcCodeArea').style.display='none';toast('Google Calendar connected!','ok')}
+  else toast('Code exchange failed. Try again.','err')
 }
-function setGCBadge(on) {
-  const b = document.getElementById('gcBadge'); b.textContent = on ? '● Connected' : '● Disconnected'; b.className = `badge ${on?'on':'off'}`
-}
+function setGCBadge(on){const b=document.getElementById('gcBadge');b.textContent=on?'● Connected':'● Disconnected';b.className=`badge ${on?'on':'off'}`}
 
 // ── MODAL / TOAST ─────────────────────────────────────────────────
-function openModal(id)  { document.getElementById(id).classList.add('open') }
-function closeModal(id) { document.getElementById(id).classList.remove('open') }
-document.querySelectorAll('.overlay').forEach(o => o.addEventListener('click', e => { if (e.target===o) o.classList.remove('open') }))
-function toast(msg, type='ok') {
-  const c = document.getElementById('toasts'), t = document.createElement('div')
-  t.className = `toast ${type}`; t.textContent = msg; c.appendChild(t); setTimeout(() => t.remove(), 3400)
-}
-document.addEventListener('keydown', e => { if (e.key==='Escape') document.querySelectorAll('.overlay.open').forEach(o => o.classList.remove('open')) })
+function openModal(id){document.getElementById(id).classList.add('open')}
+function closeModal(id){document.getElementById(id).classList.remove('open')}
+document.querySelectorAll('.overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open')}))
+function toast(msg,type='ok'){const c=document.getElementById('toasts'),t=document.createElement('div');t.className=`toast ${type}`;t.textContent=msg;c.appendChild(t);setTimeout(()=>t.remove(),3400)}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.overlay.open').forEach(o=>o.classList.remove('open'))})
 
 init()
 </script>
