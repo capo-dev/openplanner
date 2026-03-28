@@ -7,3 +7,5 @@ Thumbs.db
 *.env
 target/
 Cargo.lock
+
+ProjKeys.toml
