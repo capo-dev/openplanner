@@ -1,0 +1,21 @@
+--boundary123
+Content-Type: application/json
+
+{
+    "upload_at": "2026-12-01T00:00:00Z",
+    "video_platform": "YoutubeShorts",
+    "video_title": "My Video Title",
+    "description": "My Video Description",
+    "hashtags": [
+        "#example",
+        "#other-hash-tag"
+    ],
+    "additional": {
+        "custom-key": "custom data that needs to be used by scripts in the future"
+    }
+}
+--boundary123
+Content-Type: application/json
+
+{"example": "this would be where the video is, you can use it to make sure the request is working right by comparing text"}
+--boundary123--

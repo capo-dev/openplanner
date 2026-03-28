@@ -1,2 +1,3 @@
 [config]
 PORT = 8080
+VIDEOS_FOLDER = "videos"

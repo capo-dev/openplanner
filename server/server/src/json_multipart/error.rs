@@ -4,19 +4,28 @@ use thiserror::Error;
 #[derive(Debug, Error, Serialize)]
 pub enum JsonMultiPartError {
     #[error("No Content Type")]
-    NoContentType,
+    HttpNoContentType,
 
     #[error("Content Type Is Not Valid")]
-    ContentTypeNotValid,
+    HttpContentTypeNotValid,
 
     #[error("Expected MultiPart Mixed")]
-    ExpectedMultipartMixed,
+    HttpExpectedMultipartMixed,
 
     #[error("No Boundary In Content Type")]
-    NoBoundary,
+    HttpNoBoundary,
 
     #[error("{0}")]
-    Body(Box<str>),
+    HttpBody(Box<str>),
+
+    #[error("No application/json Part")]
+    MultiPartNoJsonPart,
+
+    #[error("No video Part")]
+    MultiPartNoVideoPart,
+
+    #[error("Malformed Multi Part Syntax")]
+    MultiPartSyntax,
 
     #[error("{0}")]
     Json(Box<str>),

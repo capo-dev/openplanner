@@ -15,7 +15,7 @@ async fn main() -> std::io::Result<()> {
     let listener = tokio::net::TcpListener::bind((Ipv4Addr::LOCALHOST, PORT)).await?;
 
     println!("openplanner server running @:");
-    println!("http://{}:{}", Ipv4Addr::LOCALHOST, PORT);
+    println!("{}:{}", Ipv4Addr::LOCALHOST, PORT);
 
     axum::serve(listener, app).await
 }

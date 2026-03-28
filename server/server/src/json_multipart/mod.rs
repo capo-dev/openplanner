@@ -1,5 +1,7 @@
 mod error;
-mod parser;
+mod header;
+mod multipart;
+mod part;
 mod value;
 
 pub use error::JsonMultiPartError;
