@@ -8,4 +8,6 @@ Thumbs.db
 target/
 Cargo.lock
 
+# custom
+videos/
 ProjKeys.toml

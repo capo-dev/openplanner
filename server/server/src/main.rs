@@ -8,7 +8,7 @@ const PORT: u16 = proj!("PORT");
 mod json_multipart;
 mod upload;
 
-#[tokio::main(flavor = "current_thread")]
+#[tokio::main(flavor = "multi_thread")]
 async fn main() -> std::io::Result<()> {
     let app = Router::new().route("/upload", post(upload::upload));
 
