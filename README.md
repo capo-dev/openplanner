@@ -2,7 +2,7 @@
 
 > Free. Open source. Runs entirely on your machine.
 
-OpenPlanner is a free, local desktop application for planning and scheduling short-form video content for **YouTube Shorts** and **Instagram Reels**. Available on Windows and macOS. No subscriptions, no cloud sync, no paywalls — ever. Your content, your data, your device.
+OpenPlanner is a free, local desktop application for planning and scheduling short-form video content across **TikTok**, **YouTube Shorts**, and **Instagram Reels**. No subscriptions, no cloud sync, no paywalls — ever. Your content, your data, your device.
 
 Built as a direct response to the wave of overpriced, data-hungry social media scheduling tools, OpenPlanner gives creators and small businesses a powerful alternative that respects their privacy and their wallet.
 
@@ -10,13 +10,14 @@ Built as a direct response to the wave of overpriced, data-hungry social media s
 
 ## Features
 
-- **AI Content Generation** — Powered by [Ollama](https://ollama.com) running locally on your device. Generate platform-optimized scripts, hooks, captions, hashtags, and posting schedules using Llama 3. Zero API costs, zero data leaving your machine.
-- **Visual Content Calendar** — A full monthly calendar view with color-coded post pills. Purple for Reels, red for Shorts, amber for both. Click any day to instantly schedule a post.
-- **Google Calendar Sync** — Optionally sync scheduled posts directly to Google Calendar with color coding, caption notes, and automatic 24hr + 1hr reminders.
+- **Video Upload & Scheduling** — Drag and drop your video, fill in the details, and schedule it across one or multiple platforms in a single flow.
+- **Visual Content Calendar** — A full monthly calendar view with color-coded post pills. Click any day to view or schedule posts. Toggle between calendar and list view.
+- **Multi-Platform Support** — TikTok, YouTube Shorts, and Instagram Reels. Connect each platform with your credentials and manage scheduled posts per platform.
+- **Hashtag System** — Add hashtags manually, save them as reusable presets, and apply presets across future posts.
+- **Timezone Wheel** — Set your posting timezone with a native scroll wheel — no dropdowns.
+- **Google Calendar Sync** — Optionally sync scheduled posts directly to Google Calendar with color coding and automatic reminders.
 - **Four Built-in Themes** — Midnight, Nord, Sakura, and Slate. Switch anytime from Settings.
-- **100% Local Storage** — All posts, settings, and credentials are stored on your device via electron-store. Nothing is ever sent to an external database.
-- **Built-in Setup Wizard** — Detects Ollama on first launch, walks through the Llama 3 download, and gets you generating content in minutes.
-- **Native Apple Silicon Support** — Builds natively for M1, M2, and M3 Macs. No Rosetta required.
+- **100% Local Storage** — All posts, credentials, and settings are stored on your device via electron-store. Nothing is ever sent to an external database.
 
 ---
 
@@ -32,7 +33,6 @@ Built as a direct response to the wave of overpriced, data-hungry social media s
 |---|---|
 | Desktop Framework | [Electron.js](https://electronjs.org) |
 | UI | Vanilla HTML, CSS, JavaScript |
-| AI Engine | [Ollama](https://ollama.com) + Llama 3 (local) |
 | Local Storage | [electron-store](https://github.com/sindresorhus/electron-store) |
 | Calendar Integration | Google Calendar API (OAuth 2.0) |
 | Installer | electron-builder → `.exe` (Windows) / `.dmg` (macOS) |
@@ -45,20 +45,18 @@ Built as a direct response to the wave of overpriced, data-hungry social media s
 ### Windows
 - Windows 10 or Windows 11 (64-bit)
 - [Node.js](https://nodejs.org/) v18 or later
-- [Ollama](https://ollama.com/download) installed and running
 
 ### macOS
 - macOS 11 (Big Sur) or later
 - Intel or Apple Silicon (M1/M2/M3) — both supported natively
 - [Node.js](https://nodejs.org/) v18 or later
-- [Ollama](https://ollama.com/download) installed and running
 
 ---
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/capo-dev/openplanner
+git clone https://github.com/capo-dev/openplanner.git
 cd openplanner
 npm install
 npm start
@@ -96,30 +94,6 @@ npm run build:portable
 
 ---
 
-## AI Setup — Ollama + Llama 3
-
-OpenPlanner runs AI 100% locally using Ollama. No API keys required.
-
-1. Download and install Ollama from [ollama.com/download](https://ollama.com/download)
-2. Launch OpenPlanner — the built-in Setup Wizard will detect Ollama and offer to download Llama 3 automatically
-3. Or pull it manually via terminal:
-
-```bash
-ollama pull llama3
-```
-
-The green dot in the sidebar confirms Ollama is running and ready.
-
-### Supported models
-
-| Model | Size | Notes |
-|---|---|---|
-| `llama3` | ~4.7 GB | Default — best quality |
-| `mistral` | ~4.1 GB | Great balance of speed and quality |
-| `phi3` | ~2.3 GB | Lightweight, faster on older hardware |
-
----
-
 ## Google Calendar Setup (Optional)
 
 1. Go to [console.cloud.google.com](https://console.cloud.google.com)
@@ -133,28 +107,39 @@ The green dot in the sidebar confirms Ollama is running and ready.
 
 ---
 
+## Connecting Platforms
+
+### Instagram Reels
+Create a Meta Developer app and generate a long-lived access token via the Instagram Graph API. [Setup guide →](https://developers.facebook.com/docs/instagram-api/getting-started)
+
+### YouTube Shorts
+Create a Google Cloud project, enable the YouTube Data API v3, and generate an OAuth 2.0 Client ID. [Setup guide →](https://developers.google.com/youtube/v3/getting-started)
+
+### TikTok
+TikTok's Content Posting API requires official app review before auto-posting is enabled. Start early — approval can take several weeks. [Setup guide →](https://developers.tiktok.com/products/content-posting-api)
+
+---
+
 ## Project Structure
 
 ```
 openplanner/
-├── main.js                        # Electron main process (window, IPC, Ollama, Google OAuth)
-├── preload.js                     # Context bridge (exposes APIs to renderer)
-├── index.html                     # Entire app UI, styles, and logic
-├── package.json                   # Build config and dependencies (Windows + macOS)
+├── main.js          # Electron main process (window, IPC, Google OAuth)
+├── preload.js       # Context bridge (exposes APIs to renderer)
+├── index.html       # Entire app UI, styles, and logic
+├── package.json     # Build config and dependencies (Windows + macOS)
 └── assets/
-    ├── icon.ico                   # Windows app icon (256x256)
-    ├── icon.icns                  # macOS app icon
-    ├── entitlements.mac.plist     # macOS security entitlements
-    └── dmg-background.png         # Optional: 540×380px DMG background
+    ├── icon.ico     # Windows app icon (256x256)
+    ├── icon.icns    # macOS app icon
+    ├── entitlements.mac.plist
+    └── dmg-background.png
 ```
-
-> 💡 Need an `.icns` file for macOS? Convert any `.png` at [cloudconvert.com/png-to-icns](https://cloudconvert.com/png-to-icns)
 
 ---
 
 ## Contributing
 
-OpenPlanner is open source and all contributions are welcome — bug fixes, new themes, feature suggestions, translations, or documentation improvements.
+OpenPlanner is open source and all contributions are welcome.
 
 1. Fork this repo
 2. Create a branch: `git checkout -b feature/your-feature-name`
@@ -162,7 +147,7 @@ OpenPlanner is open source and all contributions are welcome — bug fixes, new 
 4. Push to your fork: `git push origin feature/your-feature-name`
 5. Open a Pull Request
 
-Please open an issue first for any large changes so we can align on the approach before you build.
+Please open an issue first for any large changes so we can align on approach before you build.
 
 ---
 
@@ -179,4 +164,4 @@ MIT — free to use, modify, and distribute. See [LICENSE](./LICENSE) for detail
 
 ---
 
-> OpenPlanner is an independent open-source project. It is not affiliated with Anthropic, Google, Instagram, or YouTube.
+> OpenPlanner is an independent open-source project. It is not affiliated with Google, Instagram, TikTok, or YouTube.
